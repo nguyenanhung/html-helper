@@ -298,19 +298,3 @@ if (!function_exists('seo_meta_tag_equiv')) {
         return (new nguyenanhung\Libraries\HTML\Common())->meta($data);
     }
 }
-if (!function_exists('escapeHtml')) {
-    /**
-     * Function escapeHtml
-     *
-     * @param string $html
-     *
-     * @return array|mixed|string
-     * @author   : 713uk13m <dev@nguyenanhung.com>
-     * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 09/21/2021 32:52
-     */
-    function escapeHtml($html = '')
-    {
-        return (new nguyenanhung\Libraries\HTML\Common())->htmlEscape($html);
-    }
-}
