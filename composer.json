@@ -1,0 +1,35 @@
+{
+    "type": "library",
+    "name": "nguyenanhung/html-helper",
+    "description": "Light, Simple and Small HTML Helper",
+    "keywords": [
+        "helper",
+        "html",
+        "php"
+    ],
+    "homepage": "https://github.com/nguyenanhung/html-helper",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Nguyen An Hung",
+            "email": "dev@nguyenanhung.com",
+            "homepage": "https://nguyenanhung.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "nguyenanhung\\Libraries\\HTML\\": "src/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    }
+}
