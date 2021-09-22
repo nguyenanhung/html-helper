@@ -311,5 +311,242 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
 
             return $str;
         }
+
+        /**
+         * Function stripQuotes
+         *
+         * @param string $str
+         *
+         * @return array|string|string[]
+         * @author   : 713uk13m <dev@nguyenanhung.com>
+         * @copyright: 713uk13m <dev@nguyenanhung.com>
+         * @time     : 08/08/2021 11:13
+         */
+        public function stripQuotes($str = '')
+        {
+            return str_replace(['"', "'"], '', $str);
+        }
+
+        /**
+         * Quotes to Entities
+         *
+         * Converts single and double quotes to entities
+         *
+         * @param string
+         *
+         * @return    string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:25
+         *
+         */
+        public function quotesToEntities($str = '')
+        {
+            return str_replace(["\'", "\"", "'", '"'], ["&#39;", "&quot;", "&#39;", "&quot;"], $str);
+        }
+
+        /**
+         * Reduce Double Slashes
+         *
+         * Converts double slashes in a string to a single slash,
+         * except those found in http://
+         *
+         * http://www.some-site.com//index.php
+         *
+         * becomes:
+         *
+         * http://www.some-site.com/index.php
+         *
+         * @param string
+         *
+         * @return    string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:25
+         *
+         */
+        public function reduceDoubleSlashes($str = '')
+        {
+            return preg_replace('#(^|[^:])//+#', '\\1/', $str);
+        }
+
+        /**
+         * Reduce Multiples
+         *
+         * Reduces multiple instances of a particular character.  Example:
+         *
+         * Fred, Bill,, Joe, Jimmy
+         *
+         * becomes:
+         *
+         * Fred, Bill, Joe, Jimmy
+         *
+         * @param string
+         * @param string    the character you wish to reduce
+         * @param bool    TRUE/FALSE - whether to trim the character from the beginning/end
+         *
+         * @return    string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:25
+         *
+         */
+        public function reduceMultiples($str = '', $character = ',', $trim = false)
+        {
+            $str = preg_replace('#' . preg_quote($character, '#') . '{2,}#', $character, $str);
+
+            return ($trim === true) ? trim($str, $character) : $str;
+        }
+
+        /**
+         * Function sitemapParse
+         *
+         * @param string       $domain
+         * @param string|array $loc
+         * @param string       $lastmod
+         * @param string       $type
+         * @param string       $newline
+         *
+         * @return string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:11
+         *
+         */
+        public function sitemapParse($domain = '', $loc = '', $lastmod = '', $type = 'property', $newline = "\n")
+        {
+            // Since we allow the data to be passes as a string, a simple array
+            // or a multidimensional one, we need to do a little prepping.
+            if (!is_array($loc)) {
+                $loc = [
+                    [
+                        'loc'     => $loc,
+                        'lastmod' => $lastmod,
+                        'type'    => $type,
+                        'newline' => $newline
+                    ]
+                ];
+            } elseif (isset($loc['loc'])) {
+                // Turn single array into multidimensional
+                $loc = [
+                    $loc
+                ];
+            }
+            $str = '';
+            foreach ($loc as $meta) {
+                $type    = 'loc';
+                $loc     = isset($meta['loc']) ? $meta['loc'] : '';
+                $lastmod = isset($meta['lastmod']) ? $meta['lastmod'] : '';
+                $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
+                $str     .= "\n<sitemap>\n";
+                $str     .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
+                $str     .= "\n<lastmod>" . $lastmod . "</lastmod>";
+                $str     .= "\n</sitemap>";
+                $str     .= $newline;
+            }
+
+            return $str;
+        }
+
+        /**
+         * Convert Reserved XML characters to Entities
+         *
+         * @param string
+         * @param bool
+         *
+         * @return    string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:11
+         *
+         */
+        public function xmlConvert($str, $protect_all = false)
+        {
+            $temp = '__TEMP_AMPERSANDS__';
+
+            // Replace entities to temporary markers so that
+            // ampersands won't get messed up
+            $str = preg_replace('/&#(\d+);/', $temp . '\\1;', $str);
+
+            if ($protect_all === true) {
+                $str = preg_replace('/&(\w+);/', $temp . '\\1;', $str);
+            }
+
+            $str = str_replace(
+                ['&', '<', '>', '"', "'", '-'],
+                ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'],
+                $str
+            );
+
+            // Decode the temp markers back to entities
+            $str = preg_replace('/' . $temp . '(\d+);/', '&#\\1;', $str);
+
+            if ($protect_all === true) {
+                return preg_replace('/' . $temp . '(\w+);/', '&\\1;', $str);
+            }
+
+            return $str;
+        }
+
+        /**
+         * Function viewPagination
+         *
+         * @param array $input_data
+         *
+         * @return null|string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 9/29/18 11:16
+         *
+         */
+        public function viewPagination($input_data = [])
+        {
+            // $page_type           = $input_data['page_type'] ?? '';
+
+            $page_link           = isset($input_data['page_link']) ? $input_data['page_link'] : '';
+            $page_title          = isset($input_data['page_title']) ? $input_data['page_title'] : '';
+            $page_prefix         = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
+            $page_suffix         = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
+            $current_page_number = isset($input_data['current_page_number']) ? $input_data['current_page_number'] : 1;
+            $total_item          = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
+            $item_per_page       = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
+            $begin               = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
+            $end                 = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
+            $first_link          = isset($input_data['first_link']) ? $input_data['first_link'] : '&nbsp;';
+            $last_link           = isset($input_data['last_link']) ? $input_data['last_link'] : '&nbsp;';
+
+            /**
+             * Kiểm tra giá trị page_number truyền vào
+             * Nếu ko có giá trị hoặc giá trị = 0 -> set giá trị = 1
+             */
+            if (!$current_page_number || empty($current_page_number)) {
+                $current_page_number = 1;
+            }
+
+            // Tính tổng số page có
+            $total_page = ceil($total_item / $item_per_page);
+            if ($total_page <= 1) {
+                return null;
+            }
+
+            $output_html = '';
+            if ($current_page_number !== 1) {
+                $output_html .= '<li class="left"><a href="' . trim($page_link) . trim($page_suffix) . '" title="' . trim($page_title) . '">' . trim($first_link) . '</a></li>';
+            }
+
+            for ($page_number = 1; $page_number <= $total_page; $page_number++) {
+                if ($page_number < ($current_page_number - $begin) || $page_number > ($current_page_number + $end)) {
+                    continue;
+                }
+
+                if ($page_number === $current_page_number) {
+                    $output_html .= '<li class="selected"><a href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) . '" title="' . $page_title . ' trang ' . $page_number . '">' . $page_number . '</a></li>';
+                } else {
+                    $output_html .= '<li><a href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) . '" title="' . $page_title . ' trang ' . $page_number . '">' . $page_number . '</a></li>';
+                }
+            }
+
+            unset($page_number);
+
+            if ($current_page_number !== $total_page) {
+                $output_html .= '<li class="right"><a href="' . trim($page_link) . trim($page_prefix) . trim($total_page) . trim($page_suffix) . '" title="' . trim($page_title) . ' - trang cuối">' . trim($last_link) . '</a></li>';
+            }
+
+            return $output_html;
+        }
     }
 }
