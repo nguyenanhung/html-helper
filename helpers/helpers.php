@@ -307,6 +307,24 @@ if (!function_exists('get_pagination_number')) {
         return (int) $str;
     }
 }
+if (!function_exists('view_pagination')) {
+    /**
+     * Function view_pagination
+     *
+     * @param array $input_data
+     *
+     * @return string|null
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 08/18/2021 55:48
+     */
+    function view_pagination($input_data = array())
+    {
+        $common = new nguyenanhung\Libraries\HTML\Common();
+
+        return $common->viewPagination($input_data);
+    }
+}
 if (!function_exists('seo_meta_tag_equiv')) {
     /**
      * Function seo_meta_tag_equiv
