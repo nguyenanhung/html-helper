@@ -30,7 +30,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:22
          *
          */
-        public function htmlEscape($var = '', $double_encode = true)
+        public function htmlEscape($var = '', bool $double_encode = true)
         {
             if (empty($var)) {
                 return $var;
@@ -58,7 +58,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * @return string
          */
-        public function tableColor($current, $previous, $id)
+        public function tableColor($current, $previous, $id): string
         {
             if (isset($previous->$id)) {
                 if ($previous->$id > $current->$id) {
@@ -89,7 +89,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:07
          *
          */
-        public function placeholder($size = '300x250', $bg_color = '', $text_color = '', $text = '', $domain = 'https://via.placeholder.com/')
+        public function placeholder(string $size = '300x250', string $bg_color = '', string $text_color = '', string $text = '', string $domain = 'https://via.placeholder.com/'): string
         {
             if (!empty($bg_color)) {
                 $bg_color = '/' . $bg_color;
@@ -118,7 +118,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:17
          *
          */
-        public function meta($name = '', $content = '', $type = 'name', $newline = "\n")
+        public function meta($name = '', string $content = '', string $type = 'name', string $newline = "\n"): string
         {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
@@ -139,9 +139,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
             $str = '';
             foreach ($name as $meta) {
                 $type    = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
-                $name    = isset($meta['name']) ? $meta['name'] : '';
-                $content = isset($meta['content']) ? $meta['content'] : '';
-                $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
+                $name    = $meta['name'] ?? '';
+                $content = $meta['content'] ?? '';
+                $newline = $meta['newline'] ?? "\n";
 
                 $str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
             }
@@ -162,7 +162,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:09
          *
          */
-        public function metaProperty($property = '', $content = '', $type = 'property', $newline = "\n")
+        public function metaProperty($property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
         {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
@@ -186,9 +186,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 if (!empty($meta)) {
                     $type = (isset($meta['type']) && $meta['type'] !== 'property') ? 'itemprop' : 'property';
                 }
-                $property = isset($meta['property']) ? $meta['property'] : '';
-                $content  = isset($meta['content']) ? $meta['content'] : '';
-                $newline  = isset($meta['newline']) ? $meta['newline'] : "\n";
+                $property = $meta['property'] ?? '';
+                $content  = $meta['content'] ?? '';
+                $newline  = $meta['newline'] ?? "\n";
                 $str      .= '<meta ' . $type . '="' . $property . '" content="' . $content . '" />' . $newline;
             }
 
@@ -205,7 +205,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:18
          *
          */
-        public function metaTagEquiv($data = [])
+        public function metaTagEquiv(array $data = []): string
         {
             $content    = array(
                 array(
@@ -215,7 +215,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 ),
                 array(
                     'name'    => 'refresh',
-                    'content' => isset($data['refresh']['content']) ? $data['refresh']['content'] : 1800,
+                    'content' => $data['refresh']['content'] ?? 1800,
                     'type'    => 'equiv'
                 ),
                 array(
@@ -225,7 +225,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 ),
                 array(
                     'name'    => 'audience',
-                    'content' => isset($data['audience']['content']) ? $data['audience']['content'] : 'general',
+                    'content' => $data['audience']['content'] ?? 'general',
                     'type'    => 'equiv'
                 )
             );
@@ -242,7 +242,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/30/18 16:17
          *
          */
-        public function metaDnsPrefetch()
+        public function metaDnsPrefetch(): string
         {
             $meta = "<!-- DNS prefetch -->\n";
             $meta .= "<link rel='dns-prefetch' href = '//www.google-analytics.com/' > \n";
@@ -264,7 +264,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 10/13/18 09:49
          *
          */
-        public function stripHtmlTag($str = '')
+        public function stripHtmlTag(string $str = ''): string
         {
             $regex          = '/([^<]*<\s*[a-z](?:[0-9]|[a-z]{0,9}))(?:(?:\s*[a-z\-]{2,14}\s*=\s*(?:"[^"]*"|\'[^\']*\'))*)(\s*\/?>[^<]*)/i';
             $chunks         = preg_split($regex, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -291,7 +291,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 10/13/18 09:51
          *
          */
-        public function stripIsTags($str, $tags, $stripContent = false)
+        public function stripIsTags($str, $tags, bool $stripContent = false)
         {
             $content = '';
             if (!is_array($tags)) {
@@ -322,7 +322,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @copyright: 713uk13m <dev@nguyenanhung.com>
          * @time     : 08/08/2021 11:13
          */
-        public function stripQuotes($str = '')
+        public function stripQuotes(string $str = '')
         {
             return str_replace(['"', "'"], '', $str);
         }
@@ -339,7 +339,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:25
          *
          */
-        public function quotesToEntities($str = '')
+        public function quotesToEntities($str = ''): string
         {
             return str_replace(["\'", "\"", "'", '"'], ["&#39;", "&quot;", "&#39;", "&quot;"], $str);
         }
@@ -363,7 +363,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:25
          *
          */
-        public function reduceDoubleSlashes($str = '')
+        public function reduceDoubleSlashes($str = ''): string
         {
             return preg_replace('#(^|[^:])//+#', '\\1/', $str);
         }
@@ -388,7 +388,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:25
          *
          */
-        public function reduceMultiples($str = '', $character = ',', $trim = false)
+        public function reduceMultiples($str = '', $character = ',', $trim = false): string
         {
             $str = preg_replace('#' . preg_quote($character, '#') . '{2,}#', $character, $str);
 
@@ -409,7 +409,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:11
          *
          */
-        public function sitemapParse($domain = '', $loc = '', $lastmod = '', $type = 'property', $newline = "\n")
+        public function sitemapParse(string $domain = '', $loc = '', string $lastmod = '', string $type = 'property', string $newline = "\n"): string
         {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
@@ -431,9 +431,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
             $str = '';
             foreach ($loc as $meta) {
                 $type    = 'loc';
-                $loc     = isset($meta['loc']) ? $meta['loc'] : '';
-                $lastmod = isset($meta['lastmod']) ? $meta['lastmod'] : '';
-                $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
+                $loc     = $meta['loc'] ?? '';
+                $lastmod = $meta['lastmod'] ?? '';
+                $newline = $meta['newline'] ?? "\n";
                 $str     .= "\n<sitemap>\n";
                 $str     .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
                 $str     .= "\n<lastmod>" . $lastmod . "</lastmod>";
@@ -455,7 +455,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:11
          *
          */
-        public function xmlConvert($str, $protect_all = false)
+        public function xmlConvert($str, $protect_all = false): string
         {
             $temp = '__TEMP_AMPERSANDS__';
 
@@ -493,21 +493,21 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:16
          *
          */
-        public function viewPagination($input_data = [])
+        public function viewPagination(array $input_data = [])
         {
             // $page_type           = $input_data['page_type'] ?? '';
 
-            $page_link           = isset($input_data['page_link']) ? $input_data['page_link'] : '';
-            $page_title          = isset($input_data['page_title']) ? $input_data['page_title'] : '';
-            $page_prefix         = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
-            $page_suffix         = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
-            $current_page_number = isset($input_data['current_page_number']) ? $input_data['current_page_number'] : 1;
-            $total_item          = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
-            $item_per_page       = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
-            $begin               = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
-            $end                 = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
-            $first_link          = isset($input_data['first_link']) ? $input_data['first_link'] : '&nbsp;';
-            $last_link           = isset($input_data['last_link']) ? $input_data['last_link'] : '&nbsp;';
+            $page_link           = $input_data['page_link'] ?? '';
+            $page_title          = $input_data['page_title'] ?? '';
+            $page_prefix         = $input_data['page_prefix'] ?? '';
+            $page_suffix         = $input_data['page_suffix'] ?? '';
+            $current_page_number = $input_data['current_page_number'] ?? 1;
+            $total_item          = $input_data['total_item'] ?? 0;
+            $item_per_page       = $input_data['item_per_page'] ?? 10;
+            $begin               = $input_data['pre_rows'] ?? 3;
+            $end                 = $input_data['suf_rows'] ?? 3;
+            $first_link          = $input_data['first_link'] ?? '&nbsp;';
+            $last_link           = $input_data['last_link'] ?? '&nbsp;';
 
             /**
              * Kiểm tra giá trị page_number truyền vào

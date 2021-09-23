@@ -33,7 +33,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function open($action = '', array $attributes = array())
+        public static function open(string $action = '', array $attributes = array()): string
         {
             if (isset($attributes['multipart']) && $attributes['multipart']) {
                 $attributes['enctype'] = 'multipart/form-data';
@@ -52,7 +52,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          * @static
          * @return string
          */
-        public static function close()
+        public static function close(): string
         {
             return '</form>';
         }
@@ -60,15 +60,15 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
         /**
          * Creates a label for an input
          *
-         * @param string $text       The label text
-         * @param string $fieldName  Name of the input element
-         * @param array  $attributes HTML attributes
+         * @param string      $text       The label text
+         * @param string|null $fieldName  Name of the input element
+         * @param array       $attributes HTML attributes
          *
          * @return string
          */
-        public static function label($text, $fieldName = NULL, array $attributes = array())
+        public static function label(string $text, string $fieldName = null, array $attributes = array()): string
         {
-            if (!isset($attributes['for']) && $fieldName !== NULL) {
+            if (!isset($attributes['for']) && $fieldName !== null) {
                 $attributes['for'] = static::autoId($fieldName);
             }
             if (!isset($attributes['id']) && isset($attributes['for'])) {
@@ -87,7 +87,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function text($name, $value = NULL, array $attributes = array())
+        public static function text(string $name, string $value = null, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'id'    => static::autoId($name),
@@ -110,7 +110,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function password($name, $value = NULL, array $attributes = array())
+        public static function password(string $name, string $value = null, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'id'    => static::autoId($name),
@@ -133,7 +133,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function hidden($name, $value, array $attributes = array())
+        public static function hidden(string $name, string $value, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'id'    => static::autoId($name),
@@ -154,7 +154,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function textArea($name, $text = NULL, array $attributes = array())
+        public static function textArea(string $name, string $text = null, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'id'   => static::autoId($name),
@@ -176,7 +176,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string|array
          */
-        public static function checkBox($name, $checked = FALSE, $value = 1, array $attributes = array(), $withHiddenField = TRUE)
+        public static function checkBox(string $name, bool $checked = false, $value = 1, array $attributes = array(), $withHiddenField = true)
         {
             $auto_id            = static::autoId($name);
             $checkboxAttributes = array_merge(array(
@@ -184,10 +184,10 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
                                                   'type'    => 'checkbox',
                                                   'value'   => $value,
                                                   'id'      => $auto_id,
-                                                  'checked' => (bool) $checked,
+                                                  'checked' => $checked,
                                               ), $attributes);
             $checkbox           = HTML::tag('input', $checkboxAttributes);
-            if ($withHiddenField === FALSE) {
+            if ($withHiddenField === false) {
                 return $checkbox;
             }
             $hiddenAttributes = array(
@@ -215,7 +215,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          * @throws InvalidArgumentException
          * @return string|array
          */
-        public static function collectionCheckBoxes($name, array $collection, $checked, array $labelAttributes = array(), $returnAsArray = FALSE)
+        public static function collectionCheckBoxes(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
         {
             // TODO: Does this check cover all options?
             if (!(is_array($checked) || $checked instanceof Traversable)) {
@@ -226,8 +226,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
                 $checkBoxes[] = HTML::tag(
                     'label',
                     $labelAttributes,
-                    self::checkBox("{$name}[]", in_array($value, $checked, TRUE), $value, array(), FALSE) . HTML::escape($label),
-                    FALSE
+                    self::checkBox("{$name}[]", in_array($value, $checked, true), $value, array(), false) . HTML::escape($label),
+                    false
                 );
             }
 
@@ -246,13 +246,13 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function radio($name, $value, $checked = FALSE, array $attributes = array())
+        public static function radio(string $name, string $value, bool $checked = false, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'type'    => 'radio',
                                           'name'    => $name,
                                           'value'   => $value,
-                                          'checked' => (bool) $checked,
+                                          'checked' => $checked,
                                       ), $attributes);
 
             return HTML::tag('input', $attributes);
@@ -271,7 +271,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return array|string
          */
-        public static function collectionRadios($name, array $collection, $checked, array $labelAttributes = array(), $returnAsArray = FALSE)
+        public static function collectionRadios(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
         {
             $radioButtons = array();
             foreach ($collection as $value => $label) {
@@ -279,7 +279,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
                     'label',
                     $labelAttributes,
                     self::radio($name, $value, $value === $checked) . HTML::escape($label),
-                    FALSE
+                    false
                 );
             }
 
@@ -306,12 +306,12 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function select($name, array $collection, $selected = NULL, array $attributes = array())
+        public static function select(string $name, array $collection, $selected = null, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'name'     => $name,
                                           'id'       => static::autoId($name),
-                                          'multiple' => FALSE,
+                                          'multiple' => false,
                                       ), $attributes);
             if (is_string($selected) || is_numeric($selected)) {
                 $selected = array($selected => 1);
@@ -328,13 +328,13 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
                     foreach ($element as $groupName => $groupElement) {
                         $groupHtml .= static::option($groupName, $groupElement, $selected);
                     }
-                    $content .= HTML::tag('optgroup', array('label' => $value), $groupHtml, FALSE);
+                    $content .= HTML::tag('optgroup', array('label' => $value), $groupHtml, false);
                 } else {
                     $content .= static::option($value, $element, $selected);
                 }
             }
 
-            return HTML::tag('select', $attributes, $content, FALSE);
+            return HTML::tag('select', $attributes, $content, false);
         }
 
         /**
@@ -346,7 +346,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function option($value, $label, $selected)
+        public static function option(string $value, string $label, array $selected): string
         {
             // Special handling of option tag contents to enable indentation with &nbsp;
             $label = str_replace('&amp;nbsp;', '&nbsp;', HTML::escape($label));
@@ -358,7 +358,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
                     'selected' => isset($selected[$value]),
                 ),
                 $label,
-                FALSE
+                false
             );
         }
 
@@ -372,7 +372,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function file($name, array $attributes = array())
+        public static function file(string $name, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'type' => 'file',
@@ -395,7 +395,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string
          */
-        public static function button($name, $text, array $attributes = array())
+        public static function button($name, $text, array $attributes = array()): string
         {
             $attributes = array_merge(array(
                                           'id'   => static::autoId($name),
@@ -414,11 +414,11 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Form')) {
          *
          * @return string|null
          */
-        public static function autoId($name)
+        public static function autoId(string $name)
         {
             // Don't set an id on collection inputs
-            if (strpos($name, '[]') !== FALSE) {
-                return NULL;
+            if (strpos($name, '[]') !== false) {
+                return null;
             }
 
             // Hyphenate array keys, for example model[field][other_field] => model-field-other_field

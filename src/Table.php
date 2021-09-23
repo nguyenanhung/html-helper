@@ -112,7 +112,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    void
          */
-        public function __construct($config = array())
+        public function __construct(array $config = array())
         {
             // initialize config
             foreach ($config as $key => $val) {
@@ -129,7 +129,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    bool
          */
-        public function set_template($template)
+        public function set_template(array $template): bool
         {
             if (!is_array($template)) {
                 return false;
@@ -151,7 +151,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    Table
          */
-        public function set_heading($args = array())
+        public function set_heading($args = array()): Table
         {
             $this->heading = $this->_prep_args(func_get_args());
 
@@ -171,7 +171,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    array|bool
          */
-        public function make_columns($array = array(), $col_limit = 0)
+        public function make_columns(array $array = array(), int $col_limit = 0)
         {
             if (!is_int($col_limit)) {
                 return false;
@@ -217,7 +217,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    Table
          */
-        public function set_empty($value)
+        public function set_empty($value): Table
         {
             $this->empty_cells = $value;
 
@@ -235,7 +235,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    Table
          */
-        public function add_row($args = array())
+        public function add_row($args = array()): Table
         {
             $this->rows[] = $this->_prep_args(func_get_args());
 
@@ -253,7 +253,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    array
          */
-        protected function _prep_args($args)
+        protected function _prep_args($args): array
         {
             // If there is no $args[0], skip this and treat as an associative array
             // This can happen if there is only a single key, for example this is passed to table->generate
@@ -278,7 +278,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    Table
          */
-        public function set_caption($caption)
+        public function set_caption(string $caption): Table
         {
             $this->caption = $caption;
 
@@ -294,7 +294,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    string
          */
-        public function generate($table_data = null)
+        public function generate($table_data = null): string
         {
             // The table data can optionally be passed to this function
             // either as a database result object or an array
@@ -341,7 +341,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
                         }
                     }
 
-                    $out .= $temp . (isset($heading['data']) ? $heading['data'] : '') . $this->template['heading_cell_end'];
+                    $out .= $temp . ($heading['data'] ?? '') . $this->template['heading_cell_end'];
                 }
 
                 $out .= $this->template['heading_row_end'] . $this->newline . $this->template['thead_close'] . $this->newline;
@@ -371,12 +371,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
                             }
                         }
 
-                        if (isset($cell['data'])) {
-                            $cell = $cell['data'];
-                        } else {
-                            $cell = '';
-                        }
-                        $out .= $temp;
+                        $cell = $cell['data'] ?? '';
+                        $out  .= $temp;
 
                         if ($cell === '' || $cell === null) {
                             $out .= $this->empty_cells;
@@ -410,7 +406,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    Table
          */
-        public function clear()
+        public function clear(): Table
         {
             $this->rows         = array();
             $this->heading      = array();
@@ -449,7 +445,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    void
          */
-        protected function _set_from_array($data)
+        protected function _set_from_array(array $data)
         {
             if ($this->auto_heading === true && empty($this->heading)) {
                 $this->heading = $this->_prep_args(array_shift($data));
@@ -492,7 +488,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          *
          * @return    array
          */
-        protected function _default_template()
+        protected function _default_template(): array
         {
             return array(
                 'table_open'         => '<table border="0" cellpadding="4" cellspacing="0">',

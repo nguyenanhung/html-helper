@@ -18,7 +18,7 @@ if (!function_exists('attrs')) {
      *
      * @return string
      */
-    function attrs($attrs)
+    function attrs($attrs): string
     {
         $str = '';
 
@@ -41,7 +41,7 @@ if (!function_exists('css')) {
      *
      * @return string
      */
-    function css($href = '', $attrs = [])
+    function css(string $href = '', array $attrs = []): string
     {
         return '<link rel="stylesheet" type="text/css" href="' . $href . '" ' . attrs($attrs) . '>';
     }
@@ -58,7 +58,7 @@ if (!function_exists('less')) {
      *
      * @return string
      */
-    function less($href = '', $attrs = [])
+    function less(string $href = '', array $attrs = []): string
     {
         return '<link rel="stylesheet/less" type="text/css" href="' . $href . '"' . attrs($attrs) . '>';
     }
@@ -70,13 +70,13 @@ if (!function_exists('js')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param null   $src
-     * @param string $default
-     * @param array  $attrs
+     * @param string|null $src
+     * @param string      $default
+     * @param array       $attrs
      *
      * @return string
      */
-    function js($src = null, $default = '', $attrs = [])
+    function js(string $src = null, string $default = '', array $attrs = []): string
     {
         return '<script type="text/javascript" src="' . $src . '" ' . attrs($attrs) . '>' . $default . '</script>';
     }
@@ -88,12 +88,12 @@ if (!function_exists('img')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param null  $src
-     * @param array $attrs
+     * @param string|null $src
+     * @param array       $attrs
      *
      * @return string
      */
-    function img($src = null, $attrs = [])
+    function img(string $src = null, array $attrs = []): string
     {
         return '<img src="' . $src . '" ' . attrs($attrs) . '/>';
     }
@@ -105,12 +105,12 @@ if (!function_exists('fontawesome')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param string $version
-     * @param null   $href
+     * @param string      $version
+     * @param string|null $href
      *
      * @return string
      */
-    function fontawesome($version = '4.7.0', $href = null)
+    function fontawesome(string $version = '4.7.0', string $href = null): string
     {
         if (null === $href) {
             $href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/' . $version . '/css/font-awesome.min.css';
@@ -126,12 +126,12 @@ if (!function_exists('jquery')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:50
      *
-     * @param string $version
-     * @param null   $src
+     * @param string      $version
+     * @param string|null $src
      *
      * @return string
      */
-    function jquery($version = '3.2.1', $src = null)
+    function jquery(string $version = '3.2.1', string $src = null): string
     {
         if (null === $src) {
             $src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $version . '/jquery.min.js';
@@ -147,12 +147,12 @@ if (!function_exists('bootstrap_js')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:50
      *
-     * @param string $version
-     * @param null   $src
+     * @param string      $version
+     * @param string|null $src
      *
      * @return string
      */
-    function bootstrap_js($version = '4.0.0-alpha.6', $src = null)
+    function bootstrap_js(string $version = '4.0.0-alpha.6', string $src = null): string
     {
         if (null === $src) {
             $src = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' . $version . '/js/bootstrap.min.js';
@@ -168,12 +168,12 @@ if (!function_exists('bootstrap_css')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:50
      *
-     * @param string $version
-     * @param null   $href
+     * @param string      $version
+     * @param string|null $href
      *
      * @return string
      */
-    function bootstrap_css($version = '4.0.0-alpha.6', $href = null)
+    function bootstrap_css(string $version = '4.0.0-alpha.6', string $href = null): string
     {
         if (null === $href) {
             $href = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' . $version . '/css/bootstrap.min.css';
@@ -194,7 +194,7 @@ if (!function_exists('icon')) {
      *
      * @return string
      */
-    function icon($icon = '', $tag = 'i')
+    function icon(string $icon = '', string $tag = 'i'): string
     {
         return '<' . $tag . ' class="fa fa-' . $icon . '"></' . $tag . '>';
     }
@@ -210,7 +210,7 @@ if (!function_exists('google_analytics')) {
      *
      * @return string
      */
-    function google_analytics($ua = '')
+    function google_analytics(string $ua = ''): string
     {
         $out = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=" . $ua . "\"></script>";
         $out .= "<script>";
@@ -239,7 +239,7 @@ if (!function_exists('meta_property')) {
      *
      * @return string
      */
-    function meta_property($property = '', $content = '', $type = 'property', $newline = "\n")
+    function meta_property(string $property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->metaProperty($property, $content, $type, $newline);
     }
@@ -258,7 +258,7 @@ if (!function_exists('placeholder_img')) {
      *
      * @return string
      */
-    function placeholder_img($size = '300x250', $background_color = '', $text_color = '', $text = '')
+    function placeholder_img(string $size = '300x250', string $background_color = '', string $text_color = '', string $text = ''): string
     {
 
         return (new nguyenanhung\Libraries\HTML\Common())->placeholder($size, $background_color, $text_color, $text);
@@ -275,7 +275,7 @@ if (!function_exists('clean_title')) {
      *
      * @return string
      */
-    function clean_title($str = '')
+    function clean_title(string $str = ''): string
     {
         $str = strip_tags($str);
         $str = htmlspecialchars($str, ENT_QUOTES);
@@ -300,7 +300,7 @@ if (!function_exists('get_pagination_number')) {
      *
      * @return int
      */
-    function get_pagination_number($str)
+    function get_pagination_number($str): int
     {
         $str = str_replace('trang-', '', $str);
 
@@ -311,14 +311,14 @@ if (!function_exists('view_pagination')) {
     /**
      * Function view_pagination
      *
-     * @param array $input_data
+     * @param array $input_data \
      *
      * @return string|null
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 55:48
      */
-    function view_pagination($input_data = array())
+    function view_pagination(array $input_data = array())
     {
         $common = new nguyenanhung\Libraries\HTML\Common();
 
@@ -336,7 +336,7 @@ if (!function_exists('seo_meta_tag_equiv')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 10:20
      */
-    function seo_meta_tag_equiv($data = [])
+    function seo_meta_tag_equiv(array $data = []): string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->meta($data);
     }
@@ -345,13 +345,13 @@ if (!function_exists('form_label')) {
     /**
      * Creates a label for an input
      *
-     * @param string $text       The label text
-     * @param string $fieldName  Name of the input element
-     * @param array  $attributes HTML attributes
+     * @param string      $text       The label text
+     * @param string|null $fieldName  Name of the input element
+     * @param array       $attributes HTML attributes
      *
      * @return string
      */
-    function form_label($text, $fieldName = null, array $attributes = array())
+    function form_label(string $text, string $fieldName = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::label($text, $fieldName, $attributes);
     }
@@ -360,13 +360,13 @@ if (!function_exists('form_text')) {
     /**
      * Creates a text field
      *
-     * @param string $name
-     * @param string $value
-     * @param array  $attributes HTML attributes
+     * @param string      $name
+     * @param string|null $value
+     * @param array       $attributes HTML attributes
      *
      * @return string
      */
-    function form_text($name, $value = null, array $attributes = array())
+    function form_text(string $name, string $value = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::text($name, $value, $attributes);
     }
@@ -377,13 +377,13 @@ if (!function_exists('form_password')) {
      *
      *
      *
-     * @param string $name
-     * @param string $value
-     * @param array  $attributes HTML attributes
+     * @param string      $name
+     * @param string|null $value
+     * @param array       $attributes HTML attributes
      *
      * @return string
      */
-    function form_password($name, $value = null, array $attributes = array())
+    function form_password(string $name, string $value = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::password($name, $value, $attributes);
     }
@@ -400,7 +400,7 @@ if (!function_exists('form_hidden')) {
      *
      * @return string
      */
-    function form_hidden($name, $value, array $attributes = array())
+    function form_hidden(string $name, string $value, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::hidden($name, $value, $attributes);
     }
@@ -409,13 +409,13 @@ if (!function_exists('form_textArea')) {
     /**
      * Creates a textarea
      *
-     * @param string $name
-     * @param string $text
-     * @param array  $attributes HTML attributes
+     * @param string      $name
+     * @param string|null $text
+     * @param array       $attributes HTML attributes
      *
      * @return string
      */
-    function form_textArea($name, $text = null, array $attributes = array())
+    function form_textArea(string $name, string $text = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::textArea($name, $text, $attributes);
     }
@@ -433,7 +433,7 @@ if (!function_exists('form_checkBox')) {
      *
      * @return string|array
      */
-    function form_checkBox($name, $checked = false, $value = 1, array $attributes = array(), $withHiddenField = true)
+    function form_checkBox(string $name, bool $checked = false, $value = 1, array $attributes = array(), $withHiddenField = true)
     {
         return nguyenanhung\Libraries\HTML\Form::checkBox($name, $checked, $value, $attributes, $withHiddenField);
     }
@@ -451,7 +451,7 @@ if (!function_exists('form_collectionCheckBoxes')) {
      * @throws \InvalidArgumentException
      * @return string|array
      */
-    function form_collectionCheckBoxes($name, array $collection, $checked, array $labelAttributes = array(), $returnAsArray = false)
+    function form_collectionCheckBoxes(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
     {
         return nguyenanhung\Libraries\HTML\Form::collectionCheckBoxes($name, $collection, $checked, $labelAttributes, $returnAsArray);
     }
@@ -469,7 +469,7 @@ if (!function_exists('form_radio')) {
      *
      * @return string
      */
-    function form_radio($name, $value, $checked = false, array $attributes = array())
+    function form_radio(string $name, string $value, bool $checked = false, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::radio($name, $value, $checked, $attributes);
     }
@@ -488,7 +488,7 @@ if (!function_exists('form_collectionRadios')) {
      *
      * @return array|string
      */
-    function form_collectionRadios($name, array $collection, $checked, array $labelAttributes = array(), $returnAsArray = false)
+    function form_collectionRadios(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
     {
         return nguyenanhung\Libraries\HTML\Form::collectionRadios($name, $collection, $checked, $labelAttributes, $returnAsArray);
     }
@@ -514,7 +514,7 @@ if (!function_exists('form_select')) {
      *
      * @return string
      */
-    function form_select($name, array $collection, $selected = null, array $attributes = array())
+    function form_select(string $name, array $collection, $selected = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::select($name, $collection, $selected, $attributes);
     }
@@ -529,7 +529,7 @@ if (!function_exists('form_option')) {
      *
      * @return string
      */
-    function form_option($value, $label, $selected)
+    function form_option(string $value, string $label, array $selected): string
     {
         return nguyenanhung\Libraries\HTML\Form::option($value, $label, $selected);
     }
@@ -546,7 +546,7 @@ if (!function_exists('form_file')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 15:31
      */
-    function form_file($name, array $attributes = array())
+    function form_file($name, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::file($name, $attributes);
     }
@@ -564,7 +564,7 @@ if (!function_exists('form_button')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 15:22
      */
-    function form_button($name, $text, array $attributes = array())
+    function form_button($name, $text, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::button($name, $text, $attributes);
     }

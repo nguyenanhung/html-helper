@@ -40,16 +40,16 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
         /**
          * Generates an HTML tag
          *
-         * @param string $tagName    Name of the tag
-         * @param array  $attributes HTML attributes
-         * @param string $content    Content of the tag. Omit to create a self-closing tag
-         * @param bool   $escape_content
+         * @param string      $tagName    Name of the tag
+         * @param array       $attributes HTML attributes
+         * @param string|null $content    Content of the tag. Omit to create a self-closing tag
+         * @param bool        $escape_content
          *
          * @see attributes()
          *
          * @return string
          */
-        public static function tag($tagName, array $attributes = array(), $content = null, $escape_content = true)
+        public static function tag(string $tagName, array $attributes = array(), string $content = null, bool $escape_content = true): string
         {
             $result = '<' . $tagName . static::attributes($attributes) . '>';
             if ($content !== null) {
@@ -79,7 +79,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return string
          */
-        public static function attributes(array $attributes)
+        public static function attributes(array $attributes): string
         {
             $result = '';
             foreach ($attributes as $attribute => $value) {
@@ -110,7 +110,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return string
          */
-        public static function escape($string)
+        public static function escape(string $string): string
         {
             return htmlspecialchars($string, ENT_QUOTES);
         }
@@ -126,7 +126,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string The parsed attribute (attribute="value")
          */
-        private static function parse_attr($attributes)
+        private static function parse_attr($attributes): string
         {
             if (is_string($attributes)) {
                 return (!empty($attributes)) ? ' ' . trim($attributes) : '';
@@ -154,7 +154,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return string The parsed input HTML
          */
-        private static function parse_fields($fields)
+        private static function parse_fields(array $fields): string
         {
             if (is_array($fields)) {
                 $field = '';
@@ -176,12 +176,12 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access private
          *
-         * @param array  $items The array with a list to transform into a <li></li> tag
-         * @param string $class A class for the items
+         * @param array       $items The array with a list to transform into a <li></li> tag
+         * @param string|null $class A class for the items
          *
          * @return string The complete <li></li> tag
          */
-        private static function list_item($items, $class = null)
+        private static function list_item(array $items, string $class = null): string
         {
             if (is_array($items)) {
                 $class = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
@@ -207,9 +207,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @param string $str  The input string to filter
          * @param string $mode The filter mode
          *
-         * @return    mixed May return the filtered string or may return null if the $mode variable isn't set
+         * @return    array|string|string[]|null May return the filtered string or may return null if the $mode variable isn't set
          */
-        private static function filter($str, $mode)
+        private static function filter(string $str, string $mode)
         {
             switch ($mode) {
                 case 'strip':
@@ -245,7 +245,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string
          */
-        public static function Doctype($type = 'html5')
+        public static function Doctype(string $type = 'html5'): string
         {
             $doctypes = array(
                 'html5'         => '<!DOCTYPE html>',
@@ -260,9 +260,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
 
             if (isset($doctypes[strtolower($type)])) {
                 return $doctypes[$type] . "\n";
-            } else {
-                return '';
             }
+
+            return '';
         }
 
         /**
@@ -276,7 +276,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string The formated <img /> tag
          */
-        public static function Image($src, $attributes = '')
+        public static function Image(string $src, $attributes = ''): string
         {
             if (isset($attributes) && !empty($attributes)) {
                 $attributes = self::parse_attr($attributes);
@@ -294,13 +294,13 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access    public
          *
-         * @param string $url        the URL
-         * @param string $label      the link value
-         * @param mixed  $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
+         * @param string      $url        the URL
+         * @param string|null $label      the link value
+         * @param mixed       $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
          *
          * @return    string The formated <a></a> tag
          */
-        public static function Anchor($url, $label = null, $attributes = null)
+        public static function Anchor(string $url, string $label = null, $attributes = null): string
         {
             $label = (!empty($label)) ? $label : $url;
 
@@ -318,12 +318,12 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @access    public
          *
          * @param           $email
-         * @param string    $label      The anchor value.
-         * @param mixed     $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
+         * @param string|null $label The anchor value.
+         * @param mixed $attributes  Custom attributes (must be a valid attribute for the <a></a> tag)
          *
          * @return    string The formated <a></a> tag with the 'href' attribute set for: mailto:$email
          */
-        public static function Email($email, $label = null, $attributes = null)
+        public static function Email($email, string $label = null, $attributes = null): string
         {
             $label = (!empty($label)) ? $label : $email;
 
@@ -346,7 +346,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string
          */
-        public static function LineBreak($count = 1)
+        public static function LineBreak(int $count = 1): string
         {
             return str_repeat('<br />', $count) . PHP_EOL;
         }
@@ -361,7 +361,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string
          */
-        public static function Space($count = 1)
+        public static function Space(int $count = 1): string
         {
             return str_repeat('&nbsp;', $count);
         }
@@ -380,7 +380,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return string
          */
-        public static function Form($action, $fields, $name = null, $method = 'post', $enctype = 'multipart/form-data')
+        public static function Form($action, $fields, $name = null, $method = 'post', $enctype = 'multipart/form-data'): string
         {
             $name    = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
             $method  = (isset($method)) ? ' method="' . $method . '"' : null;
@@ -404,7 +404,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string Return the opened tag (<$tag>)
          */
-        public static function Open($tag, $attributes = null, $li_items = array())
+        public static function Open($tag, $attributes = null, $li_items = array()): string
         {
             self::$tag = strtolower($tag);
 
@@ -433,7 +433,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access    public
          */
-        public static function Close()
+        public static function Close(): string
         {
             return PHP_EOL . '</' . self::$tag . '>' . PHP_EOL;
         }
@@ -449,11 +449,11 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          *
          * @return    string The safe string.
          */
-        public static function Filter_XSS($str, $args)
+        public static function Filter_XSS(string $str, array $args)
         {
             /* Loop trough the args and apply the filters. */
             foreach ($args as $name => $data) {
-                $safe = false;
+                //$safe = false;
                 $type = mb_substr($name, 0, 1);
                 switch ($type) {
                     case '%':
@@ -477,7 +477,6 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
                         break;
                     default:
                         return null;
-                        break;
                 }
 
                 if ($safe !== false) {
@@ -494,7 +493,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access    public
          */
-        public static function Version()
+        public static function Version(): string
         {
             return self::VERSION;
         }
