@@ -232,14 +232,14 @@ if (!function_exists('meta_property')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2019-03-25 14:28
      *
-     * @param string $property
-     * @param string $content
-     * @param string $type
-     * @param string $newline
+     * @param string|array $property
+     * @param string       $content
+     * @param string       $type
+     * @param string       $newline
      *
      * @return string
      */
-    function meta_property(string $property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
+    function meta_property($property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->metaProperty($property, $content, $type, $newline);
     }
@@ -320,9 +320,7 @@ if (!function_exists('view_pagination')) {
      */
     function view_pagination(array $input_data = array())
     {
-        $common = new nguyenanhung\Libraries\HTML\Common();
-
-        return $common->viewPagination($input_data);
+        return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($input_data);
     }
 }
 if (!function_exists('seo_meta_tag_equiv')) {
