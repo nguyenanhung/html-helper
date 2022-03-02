@@ -232,7 +232,7 @@ if (!function_exists('meta_property')) {
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2019-03-25 14:28
      *
-     * @param string $property
+     * @param string|array $property
      * @param string $content
      * @param string $type
      * @param string $newline
