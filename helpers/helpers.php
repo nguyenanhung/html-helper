@@ -219,7 +219,7 @@ if (!function_exists('google_analytics')) {
         $out .= "dataLayer.push(arguments);";
         $out .= " }";
         $out .= "   gtag('js', new Date());";
-        $out .= "  gtag('config', 'UA-130083928-1');";
+        $out .= "  gtag('config', '" . $ua . "');";
         $out .= "</script>";
 
         return $out;
@@ -233,9 +233,9 @@ if (!function_exists('meta_property')) {
      * @time  : 2019-03-25 14:28
      *
      * @param string|array $property
-     * @param string $content
-     * @param string $type
-     * @param string $newline
+     * @param string       $content
+     * @param string       $type
+     * @param string       $newline
      *
      * @return string
      */
