@@ -219,7 +219,7 @@ if (!function_exists('google_analytics')) {
         $out .= "dataLayer.push(arguments);";
         $out .= " }";
         $out .= "   gtag('js', new Date());";
-        $out .= "  gtag('config', 'UA-130083928-1');";
+        $out .= "  gtag('config', '" . $ua . "');";
         $out .= "</script>";
 
         return $out;
