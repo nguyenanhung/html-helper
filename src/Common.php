@@ -133,15 +133,20 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 );
             } elseif (isset($name['name'])) {
                 // Turn single array into multidimensional
-                $name = [$name];
+                $name = array($name);
             }
 
             $str = '';
             foreach ($name as $meta) {
-                $type    = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
-                $name    = isset($meta['name']) ? $meta['name'] : '';
+                $type = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
+                $name = isset($meta['name']) ? $meta['name'] : '';
                 $content = isset($meta['content']) ? $meta['content'] : '';
                 $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
+
+                // Remove XSS or Html Tag
+                $type = strip_tags($type);
+                $name = strip_tags($name);
+                $content = strip_tags($content);
 
                 $str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
             }
@@ -177,9 +182,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 );
             } elseif (isset($property['property'])) {
                 // Turn single array into multidimensional
-                $property = array(
-                    $property
-                );
+                $property = array($property);
             }
             $str = '';
             foreach ($property as $meta) {
@@ -187,9 +190,15 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                     $type = (isset($meta['type']) && $meta['type'] !== 'property') ? 'itemprop' : 'property';
                 }
                 $property = isset($meta['property']) ? $meta['property'] : '';
-                $content  = isset($meta['content']) ? $meta['content'] : '';
-                $newline  = isset($meta['newline']) ? $meta['newline'] : "\n";
-                $str      .= '<meta ' . $type . '="' . $property . '" content="' . $content . '" />' . $newline;
+                $content = isset($meta['content']) ? $meta['content'] : '';
+                $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
+
+                // Remove XSS or Html Tag
+                $type = strip_tags($type);
+                $property = strip_tags($property);
+                $content = strip_tags($content);
+
+                $str .= '<meta ' . $type . '="' . $property . '" content="' . $content . '" />' . $newline;
             }
 
             return $str;
@@ -205,9 +214,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:18
          *
          */
-        public function metaTagEquiv($data = [])
+        public function metaTagEquiv($data = array())
         {
-            $content    = array(
+            $content = array(
                 array(
                     'name'    => 'X-UA-Compatible',
                     'content' => 'IE=edge',
@@ -266,9 +275,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          */
         public function stripHtmlTag($str = '')
         {
-            $regex          = '/([^<]*<\s*[a-z](?:[0-9]|[a-z]{0,9}))(?:(?:\s*[a-z\-]{2,14}\s*=\s*(?:"[^"]*"|\'[^\']*\'))*)(\s*\/?>[^<]*)/i';
-            $chunks         = preg_split($regex, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
-            $chunkCount     = count($chunks);
+            $regex = '/([^<]*<\s*[a-z](?:[0-9]|[a-z]{0,9}))(?:(?:\s*[a-z\-]{2,14}\s*=\s*(?:"[^"]*"|\'[^\']*\'))*)(\s*\/?>[^<]*)/i';
+            $chunks = preg_split($regex, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
+            $chunkCount = count($chunks);
             $strippedString = '';
             for ($n = 1; $n < $chunkCount; $n++) {
                 $strippedString .= $chunks[$n];
@@ -332,7 +341,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * Converts single and double quotes to entities
          *
-         * @param string
+         * @param string $str
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -356,7 +365,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * http://www.some-site.com/index.php
          *
-         * @param string
+         * @param string $str
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -379,9 +388,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * Fred, Bill, Joe, Jimmy
          *
-         * @param string
-         * @param string    the character you wish to reduce
-         * @param bool    TRUE/FALSE - whether to trim the character from the beginning/end
+         * @param string $str
+         * @param string $character the character you wish to reduce
+         * @param bool   $trim      TRUE/FALSE - whether to trim the character from the beginning/end
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -430,15 +439,15 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
             }
             $str = '';
             foreach ($loc as $meta) {
-                $type    = 'loc';
-                $loc     = isset($meta['loc']) ? $meta['loc'] : '';
+                $type = 'loc';
+                $loc = isset($meta['loc']) ? $meta['loc'] : '';
                 $lastmod = isset($meta['lastmod']) ? $meta['lastmod'] : '';
                 $newline = isset($meta['newline']) ? $meta['newline'] : "\n";
-                $str     .= "\n<sitemap>\n";
-                $str     .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
-                $str     .= "\n<lastmod>" . $lastmod . "</lastmod>";
-                $str     .= "\n</sitemap>";
-                $str     .= $newline;
+                $str .= "\n<sitemap>\n";
+                $str .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
+                $str .= "\n<lastmod>" . $lastmod . "</lastmod>";
+                $str .= "\n</sitemap>";
+                $str .= $newline;
             }
 
             return $str;
@@ -447,8 +456,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
         /**
          * Convert Reserved XML characters to Entities
          *
-         * @param string
-         * @param bool
+         * @param string $str
+         * @param bool   $protect_all
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -467,11 +476,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 $str = preg_replace('/&(\w+);/', $temp . '\\1;', $str);
             }
 
-            $str = str_replace(
-                ['&', '<', '>', '"', "'", '-'],
-                ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'],
-                $str
-            );
+            $str = str_replace(['&', '<', '>', '"', "'", '-'], ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'], $str);
 
             // Decode the temp markers back to entities
             $str = preg_replace('/' . $temp . '(\d+);/', '&#\\1;', $str);
@@ -497,17 +502,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
         {
             // $page_type           = $input_data['page_type'] ?? '';
 
-            $page_link           = isset($input_data['page_link']) ? $input_data['page_link'] : '';
-            $page_title          = isset($input_data['page_title']) ? $input_data['page_title'] : '';
-            $page_prefix         = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
-            $page_suffix         = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
+            $page_link = isset($input_data['page_link']) ? $input_data['page_link'] : '';
+            $page_title = isset($input_data['page_title']) ? $input_data['page_title'] : '';
+            $page_prefix = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
+            $page_suffix = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
             $current_page_number = isset($input_data['current_page_number']) ? $input_data['current_page_number'] : 1;
-            $total_item          = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
-            $item_per_page       = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
-            $begin               = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
-            $end                 = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
-            $first_link          = isset($input_data['first_link']) ? $input_data['first_link'] : '&nbsp;';
-            $last_link           = isset($input_data['last_link']) ? $input_data['last_link'] : '&nbsp;';
+            $total_item = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
+            $item_per_page = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
+            $begin = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
+            $end = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
+            $first_link = isset($input_data['first_link']) ? $input_data['first_link'] : '&nbsp;';
+            $last_link = isset($input_data['last_link']) ? $input_data['last_link'] : '&nbsp;';
 
             /**
              * Kiểm tra giá trị page_number truyền vào
@@ -561,17 +566,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          */
         public function viewVideoTVPagination($input_data = array())
         {
-            $page_link           = isset($input_data['page_link']) ? $input_data['page_link'] : '';
-            $page_title          = isset($input_data['page_title']) ? $input_data['page_title'] : '';
-            $page_prefix         = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
-            $page_suffix         = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
+            $page_link = isset($input_data['page_link']) ? $input_data['page_link'] : '';
+            $page_title = isset($input_data['page_title']) ? $input_data['page_title'] : '';
+            $page_prefix = isset($input_data['page_prefix']) ? $input_data['page_prefix'] : '';
+            $page_suffix = isset($input_data['page_suffix']) ? $input_data['page_suffix'] : '';
             $current_page_number = isset($input_data['current_page_number']) ? $input_data['current_page_number'] : 1;
-            $total_item          = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
-            $item_per_page       = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
-            $begin               = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
-            $end                 = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
-            $first_link          = isset($input_data['first_link']) ? $input_data['first_link'] : 'Đầu';
-            $last_link           = isset($input_data['last_link']) ? $input_data['last_link'] : 'Cuối';
+            $total_item = isset($input_data['total_item']) ? $input_data['total_item'] : 0;
+            $item_per_page = isset($input_data['item_per_page']) ? $input_data['item_per_page'] : 10;
+            $begin = isset($input_data['pre_rows']) ? $input_data['pre_rows'] : 3;
+            $end = isset($input_data['suf_rows']) ? $input_data['suf_rows'] : 3;
+            $first_link = isset($input_data['first_link']) ? $input_data['first_link'] : 'Đầu';
+            $last_link = isset($input_data['last_link']) ? $input_data['last_link'] : 'Cuối';
 
             /**
              * Kiểm tra giá trị page_number truyền vào
@@ -597,21 +602,18 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 }
                 if ($page_number == $current_page_number) {
                     $output_html .= '<li class="page-item active">
-<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) .
-                                    '" title="' . $page_title . ' trang ' . $page_number . '">
+<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) . '" title="' . $page_title . ' trang ' . $page_number . '">
 ' . $page_number . '</a></li>';
                 } else {
                     $output_html .= '<li>
-<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) .
-                                    '" title="' . $page_title . ' trang ' . $page_number . '">
+<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($page_number) . trim($page_suffix) . '" title="' . $page_title . ' trang ' . $page_number . '">
                 ' . $page_number . '</a></li>';
                 }
             }
             unset($page_number);
             if ($current_page_number <> $total_page) {
                 $output_html .= '<li class="page-item next">
-<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($total_page) . trim($page_suffix) .
-                                '" title="' . trim($page_title) . ' - trang cuối">
+<a class="page-link" href="' . trim($page_link) . trim($page_prefix) . trim($total_page) . trim($page_suffix) . '" title="' . trim($page_title) . ' - trang cuối">
 ' . trim($last_link) . '</a></li>';
             }
 

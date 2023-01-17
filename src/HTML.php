@@ -122,7 +122,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access    private
          *
-         * @param mixed - An array or string for parse the specified attributes
+         * @param mixed $attributes An array or string for parse the specified attributes
          *
          * @return    string The parsed attribute (attribute="value")
          */
@@ -185,8 +185,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
         {
             if (is_array($items)) {
                 $class = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
-                $li    = '';
-                $i     = 0;
+                $li = '';
+                $i = 0;
 
                 foreach ($items as $key => $val) {
                     $i++;
@@ -214,22 +214,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
             switch ($mode) {
                 case 'strip':
                     /* HTML tags are stripped from the string
-                    before it is used. */
-                    return strip_tags($str);
+                    before it is used. */ return strip_tags($str);
                 case 'escapeAll':
                     /* HTML and special characters are escaped from the string
-                    before it is used. */
-                    return htmlentities($str, ENT_QUOTES, 'UTF-8');
+                    before it is used. */ return htmlentities($str, ENT_QUOTES, 'UTF-8');
                 case 'escape':
                     /* Only HTML tags are escaped from the string. Special characters
-                    is kept as is. */
-                    return htmlspecialchars($str, ENT_NOQUOTES, 'UTF-8');
+                    is kept as is. */ return htmlspecialchars($str, ENT_NOQUOTES, 'UTF-8');
                 case 'url':
-                    /* Encode a string according to RFC 3986 for use in a URL. */
-                    return rawurlencode($str);
+                    /* Encode a string according to RFC 3986 for use in a URL. */ return rawurlencode($str);
                 case 'filename':
-                    /* Escape a string so it's safe to be used as filename. */
-                    return str_replace('/', '-', $str);
+                    /* Escape a string so it's safe to be used as filename. */ return str_replace('/', '-', $str);
                 default:
                     return null;
             }
@@ -283,7 +278,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
             }
 
             $border = (isset($attributes['border']) && !empty($attributes['border'])) ? $attributes['border'] . ' ' : 'border="0" ';
-            $alt    = (isset($attributes['alt']) && !empty($attributes['alt'])) ? $attributes['alt'] . ' ' : 'alt="" ';
+            $alt = (isset($attributes['alt']) && !empty($attributes['alt'])) ? $attributes['alt'] . ' ' : 'alt="" ';
 
             return '<img src="' . $src . '"' . $attributes . ' ' . $border . $alt . '/>';
         }
@@ -382,12 +377,12 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          */
         public static function Form($action, $fields, $name = null, $method = 'post', $enctype = 'multipart/form-data')
         {
-            $name    = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
-            $method  = (isset($method)) ? ' method="' . $method . '"' : null;
+            $name = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
+            $method = (isset($method)) ? ' method="' . $method . '"' : null;
             $enctype = (isset($enctype)) ? ' enctype="' . $enctype . '"' : null;
-            $html    = '<form action="' . $action . '"' . $name . $method . $enctype . '>' . PHP_EOL;
-            $html    .= self::parse_fields($fields);
-            $html    .= '</form>' . PHP_EOL;
+            $html = '<form action="' . $action . '"' . $name . $method . $enctype . '>' . PHP_EOL;
+            $html .= self::parse_fields($fields);
+            $html .= '</form>' . PHP_EOL;
 
             return $html;
         }
@@ -458,22 +453,18 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
                 switch ($type) {
                     case '%':
                         /* %variables: HTML tags are stripped of from the string
-                        before it's inserted. */
-                        $safe = self::filter($data, 'strip');
+                        before it's inserted. */ $safe = self::filter($data, 'strip');
                         break;
                     case '!':
                         /* !variables: HTML and special characters are escaped from the string
-                        before it is used. */
-                        $safe = self::filter($data, 'escapeAll');
+                        before it is used. */ $safe = self::filter($data, 'escapeAll');
                         break;
                     case '@':
                         /* @variables: Only HTML is escaped from the string. Special characters
-                         * is kept as it is. */
-                        $safe = self::filter($data, 'escape');
+                         * is kept as it is. */ $safe = self::filter($data, 'escape');
                         break;
                     case '&':
-                        /* Encode a string according to RFC 3986 for use in a URL. */
-                        $safe = self::filter($data, 'url');
+                        /* Encode a string according to RFC 3986 for use in a URL. */ $safe = self::filter($data, 'url');
                         break;
                     default:
                         return null;

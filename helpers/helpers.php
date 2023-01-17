@@ -41,7 +41,7 @@ if (!function_exists('css')) {
      *
      * @return string
      */
-    function css($href = '', $attrs = [])
+    function css($href = '', $attrs = array())
     {
         return '<link rel="stylesheet" type="text/css" href="' . $href . '" ' . attrs($attrs) . '>';
     }
@@ -58,7 +58,7 @@ if (!function_exists('less')) {
      *
      * @return string
      */
-    function less($href = '', $attrs = [])
+    function less($href = '', $attrs = array())
     {
         return '<link rel="stylesheet/less" type="text/css" href="' . $href . '"' . attrs($attrs) . '>';
     }
@@ -76,7 +76,7 @@ if (!function_exists('js')) {
      *
      * @return string
      */
-    function js($src = null, $default = '', $attrs = [])
+    function js($src = null, $default = '', $attrs = array())
     {
         return '<script type="text/javascript" src="' . $src . '" ' . attrs($attrs) . '>' . $default . '</script>';
     }
@@ -93,7 +93,7 @@ if (!function_exists('img')) {
      *
      * @return string
      */
-    function img($src = null, $attrs = [])
+    function img($src = null, $attrs = array())
     {
         return '<img src="' . $src . '" ' . attrs($attrs) . '/>';
     }
@@ -336,7 +336,7 @@ if (!function_exists('seo_meta_tag_equiv')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 10:20
      */
-    function seo_meta_tag_equiv($data = [])
+    function seo_meta_tag_equiv($data = array())
     {
         return (new nguyenanhung\Libraries\HTML\Common())->meta($data);
     }
