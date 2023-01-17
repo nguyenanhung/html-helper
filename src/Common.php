@@ -133,15 +133,20 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 );
             } elseif (isset($name['name'])) {
                 // Turn single array into multidimensional
-                $name = [$name];
+                $name = array($name);
             }
 
             $str = '';
             foreach ($name as $meta) {
-                $type    = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
-                $name    = $meta['name'] ?? '';
+                $type = (isset($meta['type']) && $meta['type'] !== 'name') ? 'http-equiv' : 'name';
+                $name = $meta['name'] ?? '';
                 $content = $meta['content'] ?? '';
                 $newline = $meta['newline'] ?? "\n";
+
+                // Remove XSS or Html Tag
+                $type = strip_tags($type);
+                $name = strip_tags($name);
+                $content = strip_tags($content);
 
                 $str .= '<meta ' . $type . '="' . $name . '" content="' . $content . '" />' . $newline;
             }
@@ -177,9 +182,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 );
             } elseif (isset($property['property'])) {
                 // Turn single array into multidimensional
-                $property = array(
-                    $property
-                );
+                $property = array($property);
             }
             $str = '';
             foreach ($property as $meta) {
@@ -187,9 +190,15 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                     $type = (isset($meta['type']) && $meta['type'] !== 'property') ? 'itemprop' : 'property';
                 }
                 $property = $meta['property'] ?? '';
-                $content  = $meta['content'] ?? '';
-                $newline  = $meta['newline'] ?? "\n";
-                $str      .= '<meta ' . $type . '="' . $property . '" content="' . $content . '" />' . $newline;
+                $content = $meta['content'] ?? '';
+                $newline = $meta['newline'] ?? "\n";
+
+                // Remove XSS or Html Tag
+                $type = strip_tags($type);
+                $property = strip_tags($property);
+                $content = strip_tags($content);
+
+                $str .= '<meta ' . $type . '="' . $property . '" content="' . $content . '" />' . $newline;
             }
 
             return $str;
@@ -207,7 +216,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          */
         public function metaTagEquiv(array $data = []): string
         {
-            $content    = array(
+            $content = array(
                 array(
                     'name'    => 'X-UA-Compatible',
                     'content' => 'IE=edge',
@@ -266,9 +275,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          */
         public function stripHtmlTag(string $str = ''): string
         {
-            $regex          = '/([^<]*<\s*[a-z](?:[0-9]|[a-z]{0,9}))(?:(?:\s*[a-z\-]{2,14}\s*=\s*(?:"[^"]*"|\'[^\']*\'))*)(\s*\/?>[^<]*)/i';
-            $chunks         = preg_split($regex, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
-            $chunkCount     = count($chunks);
+            $regex = '/([^<]*<\s*[a-z](?:[0-9]|[a-z]{0,9}))(?:(?:\s*[a-z\-]{2,14}\s*=\s*(?:"[^"]*"|\'[^\']*\'))*)(\s*\/?>[^<]*)/i';
+            $chunks = preg_split($regex, $str, -1, PREG_SPLIT_DELIM_CAPTURE);
+            $chunkCount = count($chunks);
             $strippedString = '';
             for ($n = 1; $n < $chunkCount; $n++) {
                 $strippedString .= $chunks[$n];
@@ -332,7 +341,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * Converts single and double quotes to entities
          *
-         * @param string
+         * @param string $str
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -356,7 +365,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * http://www.some-site.com/index.php
          *
-         * @param string
+         * @param string $str
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -379,9 +388,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * Fred, Bill, Joe, Jimmy
          *
-         * @param string
-         * @param string    the character you wish to reduce
-         * @param bool    TRUE/FALSE - whether to trim the character from the beginning/end
+         * @param string $str
+         * @param string $character the character you wish to reduce
+         * @param bool   $trim      TRUE/FALSE - whether to trim the character from the beginning/end
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -430,15 +439,15 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
             }
             $str = '';
             foreach ($loc as $meta) {
-                $type    = 'loc';
-                $loc     = $meta['loc'] ?? '';
+                $type = 'loc';
+                $loc = $meta['loc'] ?? '';
                 $lastmod = $meta['lastmod'] ?? '';
                 $newline = $meta['newline'] ?? "\n";
-                $str     .= "\n<sitemap>\n";
-                $str     .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
-                $str     .= "\n<lastmod>" . $lastmod . "</lastmod>";
-                $str     .= "\n</sitemap>";
-                $str     .= $newline;
+                $str .= "\n<sitemap>\n";
+                $str .= '<' . $type . '>' . trim($domain) . trim($loc) . '.xml' . '</loc>';
+                $str .= "\n<lastmod>" . $lastmod . "</lastmod>";
+                $str .= "\n</sitemap>";
+                $str .= $newline;
             }
 
             return $str;
@@ -467,11 +476,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
                 $str = preg_replace('/&(\w+);/', $temp . '\\1;', $str);
             }
 
-            $str = str_replace(
-                ['&', '<', '>', '"', "'", '-'],
-                ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'],
-                $str
-            );
+            $str = str_replace(['&', '<', '>', '"', "'", '-'], ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'], $str);
 
             // Decode the temp markers back to entities
             $str = preg_replace('/' . $temp . '(\d+);/', '&#\\1;', $str);
@@ -496,17 +501,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
         public function viewPagination(array $input_data = [])
         {
             // $page_type           = $input_data['page_type'] ?? '';
-            $page_link           = $input_data['page_link'] ?? '';
-            $page_title          = $input_data['page_title'] ?? '';
-            $page_prefix         = $input_data['page_prefix'] ?? '';
-            $page_suffix         = $input_data['page_suffix'] ?? '';
+            $page_link = $input_data['page_link'] ?? '';
+            $page_title = $input_data['page_title'] ?? '';
+            $page_prefix = $input_data['page_prefix'] ?? '';
+            $page_suffix = $input_data['page_suffix'] ?? '';
             $current_page_number = $input_data['current_page_number'] ?? 1;
-            $total_item          = $input_data['total_item'] ?? 0;
-            $item_per_page       = $input_data['item_per_page'] ?? 10;
-            $begin               = $input_data['pre_rows'] ?? 3;
-            $end                 = $input_data['suf_rows'] ?? 3;
-            $first_link          = $input_data['first_link'] ?? '&nbsp;';
-            $last_link           = $input_data['last_link'] ?? '&nbsp;';
+            $total_item = $input_data['total_item'] ?? 0;
+            $item_per_page = $input_data['item_per_page'] ?? 10;
+            $begin = $input_data['pre_rows'] ?? 3;
+            $end = $input_data['suf_rows'] ?? 3;
+            $first_link = $input_data['first_link'] ?? '&nbsp;';
+            $last_link = $input_data['last_link'] ?? '&nbsp;';
 
             /**
              * Kiểm tra giá trị page_number truyền vào
@@ -560,17 +565,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          */
         public function viewVideoTVPagination(array $input_data = [])
         {
-            $page_link           = $input_data['page_link'] ?? '';
-            $page_title          = $input_data['page_title'] ?? '';
-            $page_prefix         = $input_data['page_prefix'] ?? '';
-            $page_suffix         = $input_data['page_suffix'] ?? '';
+            $page_link = $input_data['page_link'] ?? '';
+            $page_title = $input_data['page_title'] ?? '';
+            $page_prefix = $input_data['page_prefix'] ?? '';
+            $page_suffix = $input_data['page_suffix'] ?? '';
             $current_page_number = $input_data['current_page_number'] ?? 1;
-            $total_item          = $input_data['total_item'] ?? 0;
-            $item_per_page       = $input_data['item_per_page'] ?? 10;
-            $begin               = $input_data['pre_rows'] ?? 3;
-            $end                 = $input_data['suf_rows'] ?? 3;
-            $first_link          = 'Đầu';
-            $last_link           = 'Cuối';
+            $total_item = $input_data['total_item'] ?? 0;
+            $item_per_page = $input_data['item_per_page'] ?? 10;
+            $begin = $input_data['pre_rows'] ?? 3;
+            $end = $input_data['suf_rows'] ?? 3;
+            $first_link = 'Đầu';
+            $last_link = 'Cuối';
             /**
              * Kiểm tra giá trị page_number truyền vào
              * Nếu ko có giá trị hoặc giá trị = 0 -> set giá trị = 1
