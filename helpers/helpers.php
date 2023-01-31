@@ -320,9 +320,7 @@ if (!function_exists('view_pagination')) {
      */
     function view_pagination($input_data = array())
     {
-        $common = new nguyenanhung\Libraries\HTML\Common();
-
-        return $common->viewPagination($input_data);
+        return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($input_data);
     }
 }
 if (!function_exists('seo_meta_tag_equiv')) {
@@ -583,5 +581,23 @@ if (!function_exists('form_autoId')) {
     function form_autoId($name)
     {
         return nguyenanhung\Libraries\HTML\Form::autoId($name);
+    }
+}
+if (!function_exists('highlight_search_keyword')) {
+    /**
+     * Function highlight_search_keyword
+     *
+     * @param $keyword
+     * @param $string
+     * @param $font_color
+     *
+     * @return array|string|string[]
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 31/01/2023 13:58
+     */
+    function highlight_search_keyword($keyword, $string, $font_color = 'background:#d46220')
+    {
+        return nguyenanhung\Libraries\HTML\Highlight::highlightSearchKeyword($keyword, $string, $font_color);
     }
 }
