@@ -38,7 +38,7 @@
 
 namespace nguyenanhung\Libraries\HTML;
 
-if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
+if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
     /**
      * HTML Table Generating Class
      *
@@ -372,7 +372,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
                         }
 
                         $cell = $cell['data'] ?? '';
-                        $out  .= $temp;
+                        $out .= $temp;
 
                         if ($cell === '' || $cell === null) {
                             $out .= $this->empty_cells;
@@ -408,8 +408,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Table')) {
          */
         public function clear(): Table
         {
-            $this->rows         = array();
-            $this->heading      = array();
+            $this->rows = array();
+            $this->heading = array();
             $this->auto_heading = true;
 
             return $this;

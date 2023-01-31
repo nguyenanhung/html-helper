@@ -9,7 +9,7 @@
  */
 
 namespace nguyenanhung\Libraries\HTML;
-if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
+if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
     /**
      * Class Common
      *

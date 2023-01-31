@@ -10,7 +10,7 @@
 
 namespace nguyenanhung\Libraries\HTML;
 
-if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
+if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
     /**
      * @abstract
      * @author        Miranda <miranda@lunnaly.com> & Gustavo <guustavo_59@hotmail.com>
@@ -185,8 +185,8 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
         {
             if (is_array($items)) {
                 $class = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
-                $li    = '';
-                $i     = 0;
+                $li = '';
+                $i = 0;
 
                 foreach ($items as $key => $val) {
                     $i++;
@@ -283,7 +283,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
             }
 
             $border = (isset($attributes['border']) && !empty($attributes['border'])) ? $attributes['border'] . ' ' : 'border="0" ';
-            $alt    = (isset($attributes['alt']) && !empty($attributes['alt'])) ? $attributes['alt'] . ' ' : 'alt="" ';
+            $alt = (isset($attributes['alt']) && !empty($attributes['alt'])) ? $attributes['alt'] . ' ' : 'alt="" ';
 
             return '<img src="' . $src . '"' . $attributes . ' ' . $border . $alt . '/>';
         }
@@ -317,9 +317,9 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          * @static
          * @access    public
          *
-         * @param           $email
-         * @param string|null $label The anchor value.
-         * @param mixed $attributes  Custom attributes (must be a valid attribute for the <a></a> tag)
+         * @param             $email
+         * @param string|null $label      The anchor value.
+         * @param mixed       $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
          *
          * @return    string The formated <a></a> tag with the 'href' attribute set for: mailto:$email
          */
@@ -382,12 +382,12 @@ if (!class_exists('nguyenanhung\Libraries\HTML\HTML')) {
          */
         public static function Form($action, $fields, $name = null, $method = 'post', $enctype = 'multipart/form-data'): string
         {
-            $name    = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
-            $method  = (isset($method)) ? ' method="' . $method . '"' : null;
+            $name = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
+            $method = (isset($method)) ? ' method="' . $method . '"' : null;
             $enctype = (isset($enctype)) ? ' enctype="' . $enctype . '"' : null;
-            $html    = '<form action="' . $action . '"' . $name . $method . $enctype . '>' . PHP_EOL;
-            $html    .= self::parse_fields($fields);
-            $html    .= '</form>' . PHP_EOL;
+            $html = '<form action="' . $action . '"' . $name . $method . $enctype . '>' . PHP_EOL;
+            $html .= self::parse_fields($fields);
+            $html .= '</form>' . PHP_EOL;
 
             return $html;
         }
