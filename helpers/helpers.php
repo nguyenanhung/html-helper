@@ -353,7 +353,7 @@ if (!function_exists('view_more_pagination')) {
         return (new nguyenanhung\Libraries\HTML\Common())->viewMorePagination($data);
     }
 }
-if (!function_exists('view_more_pagination')) {
+if (!function_exists('view_select_page_pagination')) {
     /**
      * Function view_select_page_pagination
      *
