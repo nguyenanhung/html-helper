@@ -423,19 +423,17 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
             if (!is_array($loc)) {
-                $loc = [
-                    [
+                $loc = array(
+                    array(
                         'loc'     => $loc,
                         'lastmod' => $lastmod,
                         'type'    => $type,
                         'newline' => $newline
-                    ]
-                ];
+                    )
+                );
             } elseif (isset($loc['loc'])) {
                 // Turn single array into multidimensional
-                $loc = [
-                    $loc
-                ];
+                $loc = array($loc);
             }
             $str = '';
             foreach ($loc as $meta) {
@@ -498,7 +496,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:16
          *
          */
-        public function viewPagination($input_data = [])
+        public function viewPagination($input_data = array())
         {
             // $page_type           = $input_data['page_type'] ?? '';
 
