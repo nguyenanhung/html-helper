@@ -311,16 +311,16 @@ if (!function_exists('view_pagination')) {
     /**
      * Function view_pagination
      *
-     * @param array $input_data
+     * @param array $data
      *
      * @return string|null
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 55:48
      */
-    function view_pagination($input_data = array())
+    function view_pagination($data = array())
     {
-        return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($input_data);
+        return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($data);
     }
 }
 if (!function_exists('seo_meta_tag_equiv')) {
@@ -616,9 +616,23 @@ if (!function_exists('html_tag')) {
         // list of void elements (tags that can not have content)
         static $void_elements = array(
             // html4
-            "area", "base", "br", "col", "hr", "img", "input", "link", "meta", "param",
+            "area",
+            "base",
+            "br",
+            "col",
+            "hr",
+            "img",
+            "input",
+            "link",
+            "meta",
+            "param",
             // html5
-            "command", "embed", "keygen", "source", "track", "wbr",
+            "command",
+            "embed",
+            "keygen",
+            "source",
+            "track",
+            "wbr",
             // html5.1
             "menuitem",
         );
