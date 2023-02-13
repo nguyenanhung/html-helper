@@ -293,18 +293,16 @@ if (!function_exists('get_pagination_number')) {
     /**
      * Function get_pagination_number
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2019-03-25 14:03
-     *
      * @param $str
      *
      * @return int
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 14/02/2023 26:52
      */
     function get_pagination_number($str): int
     {
-        $str = str_replace('trang-', '', $str);
-
-        return (int) $str;
+        return (new nguyenanhung\Libraries\HTML\Common())->getPageNumber($str);
     }
 }
 if (!function_exists('view_pagination')) {
@@ -321,6 +319,22 @@ if (!function_exists('view_pagination')) {
     function view_pagination(array $data = array())
     {
         return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($data);
+    }
+}
+if (!function_exists('view_pagination_for_video_tv')) {
+    /**
+     * Function view_pagination_for_video_tv
+     *
+     * @param array $data
+     *
+     * @return string|null
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 14/02/2023 26:17
+     */
+    function view_pagination_for_video_tv(array $data = array())
+    {
+        return (new nguyenanhung\Libraries\HTML\Common())->viewVideoTVPagination($data);
     }
 }
 if (!function_exists('view_more_pagination')) {
