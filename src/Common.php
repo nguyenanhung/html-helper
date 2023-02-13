@@ -499,7 +499,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @time  : 9/29/18 11:16
          *
          */
-        public function viewPagination($data = array())
+        public function viewPagination(array $data = array())
         {
             $pagination = new SimplePagination();
             $pagination->setData($data);
@@ -517,7 +517,7 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * @return string|null
          */
-        public function viewVideoTVPagination($data = array())
+        public function viewVideoTVPagination(array $data = array())
         {
             if (isset($data['left_class'])) {
                 unset($data['left_class']);
@@ -541,6 +541,42 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
         }
 
         /**
+         * Function viewMorePagination
+         *
+         * @param array $data
+         *
+         * @return string
+         * @author   : 713uk13m <dev@nguyenanhung.com>
+         * @copyright: 713uk13m <dev@nguyenanhung.com>
+         * @time     : 14/02/2023 24:45
+         */
+        public function viewMorePagination(array $data = array())
+        {
+            $pagination = new SimplePagination();
+            $pagination->setData($data);
+
+            return $pagination->buildViewMore();
+        }
+
+        /**
+         * Function viewSelectPagination
+         *
+         * @param array $data
+         *
+         * @return string
+         * @author   : 713uk13m <dev@nguyenanhung.com>
+         * @copyright: 713uk13m <dev@nguyenanhung.com>
+         * @time     : 14/02/2023 24:42
+         */
+        public function viewSelectPagination(array $data = array())
+        {
+            $pagination = new SimplePagination();
+            $pagination->setData($data);
+
+            return $pagination->buildSelectPage();
+        }
+
+        /**
          * Function cleanPaginationUrl
          *
          * @param string $str
@@ -548,13 +584,13 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          * @return string
          * @author   : 713uk13m <dev@nguyenanhung.com>
          * @copyright: 713uk13m <dev@nguyenanhung.com>
-         * @time     : 09/09/2021 17:10
+         * @time     : 14/02/2023 23:42
          */
         public function cleanPaginationUrl($str = '')
         {
-            $str = str_replace(array('trang-', 'Trang-', '/page/'), '', $str);
+            $pagination = new SimplePagination();
 
-            return trim($str);
+            return $pagination->cleanPaginationUrl($str);
         }
 
         /**
@@ -562,14 +598,16 @@ if (!class_exists('nguyenanhung\Libraries\HTML\Common')) {
          *
          * @param string $pageNumber
          *
-         * @return array|string|string[]
+         * @return int
          * @author   : 713uk13m <dev@nguyenanhung.com>
          * @copyright: 713uk13m <dev@nguyenanhung.com>
-         * @time     : 08/30/2021 02:48
+         * @time     : 14/02/2023 23:25
          */
         public function getPageNumber($pageNumber = '')
         {
-            return str_replace('trang-', '', trim($pageNumber));
+            $pagination = new SimplePagination();
+
+            return $pagination->getPageNumber($pageNumber);
         }
     }
 }
