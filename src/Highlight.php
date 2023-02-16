@@ -14,6 +14,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Highlight::class)) {
     {
         public static function highlightSearchKeyword($keyword, $string, $font_color = 'background:#d46220')
         {
+            $string = trim($string);
             $unwanted_array = array(
                 "Á" => "á",
                 "À" => "à",
