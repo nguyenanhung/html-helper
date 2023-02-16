@@ -647,6 +647,23 @@ if (!function_exists('highlight_search_keyword')) {
         return nguyenanhung\Libraries\HTML\Highlight::highlightSearchKeyword($keyword, $string, $font_color);
     }
 }
+if (!function_exists('format_keyword_for_highlight_search_keyword')) {
+    /**
+     * Function format_keyword_for_highlight_search_keyword
+     *
+     * @param $keyword
+     * @param $page
+     *
+     * @return mixed|string
+     * @author   : 713uk13m <dev@nguyenanhung.com>
+     * @copyright: 713uk13m <dev@nguyenanhung.com>
+     * @time     : 16/02/2023 47:15
+     */
+    function format_keyword_for_highlight_search_keyword($keyword, $page)
+    {
+        return nguyenanhung\Libraries\HTML\Highlight::formatForHighlightSearchKeyword($keyword, $page);
+    }
+}
 if (!function_exists('html_tag')) {
     /**
      * Create a XHTML tag
