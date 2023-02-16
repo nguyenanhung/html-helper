@@ -110,5 +110,27 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Highlight::class)) {
 
             return $string;
         }
+
+        public static function formatForHighlightSearchKeyword($keyword, $page)
+        {
+            $keyword = trim($keyword);
+            if (empty($keyword)) {
+                return '';
+            }
+            $keyword = explode(" ", $keyword);
+            // nếu page khác null hoặc 1
+            if (count($keyword) > 1) {
+                if (strlen($keyword[count($keyword) - 1]) === 1) {
+                    $keyword[count($keyword) - 1] = "";
+                }
+                $keyword = implode('%', $keyword);
+            } elseif ($page !== null || $page >= 1) {
+                $keyword = $keyword[0];
+            } else {
+                $keyword = "%" . $keyword[0];
+            }
+
+            return $keyword;
+        }
     }
 }
