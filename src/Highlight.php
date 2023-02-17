@@ -9,6 +9,7 @@
  */
 
 namespace nguyenanhung\Libraries\HTML;
+
 if (!class_exists(\nguyenanhung\Libraries\HTML\Highlight::class)) {
     class Highlight
     {
@@ -24,17 +25,6 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Highlight::class)) {
             return highlight_keyword($string, $keyword, $tag_open, $tag_close);
         }
 
-        /**
-         * Function formatForHighlightSearchKeyword
-         *
-         * @param $keyword
-         * @param $page
-         *
-         * @return mixed|string
-         * @author   : 713uk13m <dev@nguyenanhung.com>
-         * @copyright: 713uk13m <dev@nguyenanhung.com>
-         * @time     : 16/02/2023 46:21
-         */
         public static function formatForHighlightSearchKeyword($keyword, $page)
         {
             return format_keyword_for_highlight_keyword($keyword, $page);
