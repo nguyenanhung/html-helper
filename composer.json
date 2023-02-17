@@ -23,6 +23,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "nguyenanhung/text-helper": ">=1.0",
         "nguyenanhung/pagination": ">=1.0"
     },
     "autoload": {
