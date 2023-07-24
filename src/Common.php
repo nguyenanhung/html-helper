@@ -92,7 +92,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * @time  : 9/29/18 11:07
          *
          */
-        public function placeholder(string $size = '300x250', string $bg_color = '', string $text_color = '', string $text = '', string $domain = 'https://via.placeholder.com/'): string
+        public function placeholder(string $size = '300x250', string $bg_color = '', string $text_color = '', string $text = '', string $domain = 'https://placehold.co/'): string
         {
             if (!empty($bg_color)) {
                 $bg_color = '/' . $bg_color;
