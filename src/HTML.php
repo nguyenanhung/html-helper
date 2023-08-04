@@ -35,7 +35,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          *
          * @const string The current script version
          */
-        const VERSION = '1.0.0';
+        const VERSION = '1.0.1';
 
         /**
          * Generates an HTML tag
@@ -112,6 +112,9 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          */
         public static function escape(string $string): string
         {
+            if (empty($string)) {
+                return $string;
+            }
             return htmlspecialchars($string, ENT_QUOTES);
         }
 
