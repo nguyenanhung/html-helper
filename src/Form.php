@@ -417,7 +417,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
         public static function autoId(string $name)
         {
             // Don't set an id on collection inputs
-            if (strpos($name, '[]') !== false) {
+            if (mb_strpos($name, '[]') !== false) {
                 return null;
             }
 

@@ -307,7 +307,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         {
             $content = '';
             if (!is_array($tags)) {
-                $tags = (strpos($str, '>') !== false ? explode('>', str_replace('<', '', $tags)) : [
+                $tags = (mb_strpos($str, '>') !== false ? explode('>', str_replace('<', '', $tags)) : [
                     $tags
                 ]);
                 if (end($tags) === '') {
