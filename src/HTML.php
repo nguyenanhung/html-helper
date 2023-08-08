@@ -261,7 +261,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
                 'html4-frame'   => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
             );
 
-            if (isset($doctypes[strtolower($type)])) {
+            if (isset($doctypes[mb_strtolower($type)])) {
                 return $doctypes[$type] . "\n";
             }
 
@@ -409,7 +409,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          */
         public static function Open($tag, $attributes = null, $li_items = array()): string
         {
-            self::$tag = strtolower($tag);
+            self::$tag = mb_strtolower($tag);
 
             if (isset($attributes) && !empty($attributes)) {
                 $attributes = self::parse_attr($attributes);
