@@ -129,7 +129,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          *
          * @return    string The parsed attribute (attribute="value")
          */
-        private static function parse_attr($attributes): string
+        private static function parse_attr($attributes)
         {
             if (is_string($attributes)) {
                 return (!empty($attributes)) ? ' ' . trim($attributes) : '';
@@ -157,7 +157,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          *
          * @return string The parsed input HTML
          */
-        private static function parse_fields(array $fields): string
+        private static function parse_fields(array $fields)
         {
             if (is_array($fields)) {
                 $field = '';
@@ -184,7 +184,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          *
          * @return string The complete <li></li> tag
          */
-        private static function list_item(array $items, string $class = null): string
+        private static function list_item(array $items, string $class = null)
         {
             if (is_array($items)) {
                 $class = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
@@ -403,7 +403,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          *
          * @param string $tag        Which tag we're gonna open?
          * @param mixed  $attributes Custom attributes (must be a valid attribute for the specified tag)
-         * @param array  $li_items   Some array with items for <ul> or <ol> tags
+         * @param mixed  $li_items   Some array with items for <ul> or <ol> tags
          *
          * @return    string Return the opened tag (<$tag>)
          */
