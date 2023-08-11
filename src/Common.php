@@ -572,10 +572,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          */
         public function viewSelectPagination(array $data = array()): string
         {
-            $pagination = new SimplePagination();
-            $pagination->setData($data);
-
-            return $pagination->buildSelectPage();
+            return (new SimplePagination())->setData($data)->buildSelectPage();
         }
 
         /**
@@ -590,9 +587,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          */
         public function cleanPaginationUrl(string $str = ''): string
         {
-            $pagination = new SimplePagination();
-
-            return $pagination->cleanPaginationUrl($str);
+            return (new SimplePagination())->cleanPaginationUrl($str);
         }
 
         /**
@@ -607,9 +602,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          */
         public function getPageNumber(string $pageNumber = ''): int
         {
-            $pagination = new SimplePagination();
-
-            return $pagination->getPageNumber($pageNumber);
+            return (new SimplePagination())->getPageNumber($pageNumber);
         }
     }
 }

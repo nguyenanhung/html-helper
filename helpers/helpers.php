@@ -637,10 +637,10 @@ if (!function_exists('highlight_search_keyword')) {
      * @param $string
      * @param $font_color
      *
-     * @return array|string|string[]
+     * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
-     * @time     : 31/01/2023 13:58
+     * @time     : 11/08/2023 18:09
      */
     function highlight_search_keyword($keyword, $string, $font_color = 'background:#d46220')
     {
@@ -705,7 +705,7 @@ if (!function_exists('html_tag')) {
         $html .= (!empty($attr)) ? ' ' . (is_array($attr) ? array_to_attr($attr) : $attr) : '';
 
         // a void element?
-        if (in_array(strtolower($tag), $void_elements)) {
+        if (in_array(mb_strtolower($tag), $void_elements)) {
             // these can not have content
             $html .= ' />';
         } else {
