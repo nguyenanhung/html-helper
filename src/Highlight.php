@@ -13,7 +13,7 @@ namespace nguyenanhung\Libraries\HTML;
 if (!class_exists(\nguyenanhung\Libraries\HTML\Highlight::class)) {
     class Highlight
     {
-        public static function highlightSearchKeyword($keyword, $string, $font_color = null): string
+        public static function highlightSearchKeyword($keyword, $string, ?string $font_color = null): string
         {
             $tag_close = '</mark>';
             if (!empty($font_color)) {

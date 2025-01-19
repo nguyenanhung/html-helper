@@ -66,7 +66,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          *
          * @return string
          */
-        public static function label(string $text, string $fieldName = null, array $attributes = array()): string
+        public static function label(string $text, ?string $fieldName = null, array $attributes = array()): string
         {
             if (!isset($attributes['for']) && $fieldName !== null) {
                 $attributes['for'] = static::autoId($fieldName);
