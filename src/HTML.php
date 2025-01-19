@@ -40,17 +40,21 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
         /**
          * Generates an HTML tag
          *
-         * @param string      $tagName    Name of the tag
-         * @param array       $attributes HTML attributes
-         * @param string|null $content    Content of the tag. Omit to create a self-closing tag
-         * @param bool        $escape_content
-         *
-         * @see attributes()
+         * @param string $tagName Name of the tag
+         * @param array $attributes HTML attributes
+         * @param string|null $content Content of the tag. Omit to create a self-closing tag
+         * @param bool $escape_content
          *
          * @return string
+         * @see attributes()
+         *
          */
-        public static function tag(string $tagName, array $attributes = array(), string $content = null, bool $escape_content = true): string
-        {
+        public static function tag(
+            string $tagName,
+            array $attributes = array(),
+            string $content = null,
+            bool $escape_content = true
+        ): string {
             $result = '<' . $tagName . static::attributes($attributes) . '>';
             if ($content !== null) {
                 $result .= ($escape_content ? static::escape($content) : $content) . '</' . $tagName . '>';
@@ -179,7 +183,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access private
          *
-         * @param array       $items The array with a list to transform into a <li></li> tag
+         * @param array $items The array with a list to transform into a <li></li> tag
          * @param string|null $class A class for the items
          *
          * @return string The complete <li></li> tag
@@ -207,7 +211,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    private
          *
-         * @param string $str  The input string to filter
+         * @param string $str The input string to filter
          * @param string $mode The filter mode
          *
          * @return    array|string|string[]|null May return the filtered string or may return null if the $mode variable isn't set
@@ -251,14 +255,14 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
         public static function Doctype(string $type = 'html5'): string
         {
             $doctypes = array(
-                'html5'         => '<!DOCTYPE html>',
-                'xhtml11'       => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
+                'html5' => '<!DOCTYPE html>',
+                'xhtml11' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
                 'xhtml1-strict' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
-                'xhtml1-trans'  => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
-                'xhtml1-frame'  => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
-                'html4-strict'  => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
-                'html4-trans'   => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-                'html4-frame'   => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
+                'xhtml1-trans' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
+                'xhtml1-frame' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
+                'html4-strict' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
+                'html4-trans' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
+                'html4-frame' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
             );
 
             if (isset($doctypes[mb_strtolower($type)])) {
@@ -274,8 +278,8 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    public
          *
-         * @param string $src        Where is the image?
-         * @param mixed  $attributes Custom attributes (must be a valid attribute for the <img /> tag)
+         * @param string $src Where is the image?
+         * @param mixed $attributes Custom attributes (must be a valid attribute for the <img /> tag)
          *
          * @return    string The formated <img /> tag
          */
@@ -297,9 +301,9 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    public
          *
-         * @param string      $url        the URL
-         * @param string|null $label      the link value
-         * @param mixed       $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
+         * @param string $url the URL
+         * @param string|null $label the link value
+         * @param mixed $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
          *
          * @return    string The formated <a></a> tag
          */
@@ -321,8 +325,8 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @access    public
          *
          * @param             $email
-         * @param string|null $label      The anchor value.
-         * @param mixed       $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
+         * @param string|null $label The anchor value.
+         * @param mixed $attributes Custom attributes (must be a valid attribute for the <a></a> tag)
          *
          * @return    string The formated <a></a> tag with the 'href' attribute set for: mailto:$email
          */
@@ -375,16 +379,21 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    public
          *
-         * @param string $action  The action attribute value.
-         * @param array  $fields  What is the form fields?
-         * @param string $name    The form name
-         * @param string $method  The form method (post or get)
+         * @param string $action The action attribute value.
+         * @param array $fields What is the form fields?
+         * @param string $name The form name
+         * @param string $method The form method (post or get)
          * @param string $enctype The form enctype
          *
          * @return string
          */
-        public static function Form($action, $fields, $name = null, $method = 'post', $enctype = 'multipart/form-data'): string
-        {
+        public static function Form(
+            $action,
+            $fields,
+            $name = null,
+            $method = 'post',
+            $enctype = 'multipart/form-data'
+        ): string {
             $name = (isset($name) && !empty($name)) ? ' name="' . $name . '"' : null;
             $method = (isset($method)) ? ' method="' . $method . '"' : null;
             $enctype = (isset($enctype)) ? ' enctype="' . $enctype . '"' : null;
@@ -401,17 +410,17 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    private
          *
-         * @param string $tag        Which tag we're gonna open?
-         * @param mixed  $attributes Custom attributes (must be a valid attribute for the specified tag)
-         * @param mixed  $li_items   Some array with items for <ul> or <ol> tags
+         * @param string $tag Which tag we're gonna open?
+         * @param int|string|null $attributes Custom attributes (must be a valid attribute for the specified tag)
+         * @param null|array $li_items Some array with items for <ul> or <ol> tags
          *
          * @return    string Return the opened tag (<$tag>)
          */
-        public static function Open($tag, $attributes = null, $li_items = array()): string
+        public static function Open(string $tag, int|string $attributes = null, null|array $li_items = array()): string
         {
             self::$tag = mb_strtolower($tag);
 
-            if (isset($attributes) && !empty($attributes)) {
+            if (!empty($attributes)) {
                 $attributes = self::parse_attr($attributes);
             }
 
@@ -447,14 +456,14 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\HTML::class)) {
          * @static
          * @access    public
          *
-         * @param string $str  String to clean the possible XSS attack.
-         * @param array  $args The array with the parameters
+         * @param string $str String to clean the possible XSS attack.
+         * @param array $args The array with the parameters
          *
-         * @return    string The safe string.
+         * @return string|null The safe string.
          */
-        public static function Filter_XSS(string $str, array $args)
+        public static function Filter_XSS(string $str, array $args): ?string
         {
-            /* Loop trough the args and apply the filters. */
+            /* Loop through the args and apply the filters. */
             foreach ($args as $name => $data) {
                 //$safe = false;
                 $type = mb_substr($name, 0, 1);
