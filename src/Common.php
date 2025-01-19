@@ -25,15 +25,15 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function htmlEscape - Returns HTML escaped variable.
          *
-         * @param mixed $var           The input string or array of strings to be escaped.
-         * @param bool  $double_encode $double_encode set to FALSE prevents escaping twice.
+         * @param null|string $var The input string or array of strings to be escaped.
+         * @param bool $double_encode $double_encode set to FALSE prevents escaping twice.
          *
-         * @return    mixed|string            The escaped string or array of strings as a result.
+         * @return    array|string|null            The escaped string or array of strings as a result.
          * @author: 713uk13m <dev@nguyenanhung.com>
          * @time  : 9/29/18 11:22
          *
          */
-        public function htmlEscape($var = '', bool $double_encode = true)
+        public function htmlEscape(null|string $var = '', bool $double_encode = true): array|string|null
         {
             if (empty($var)) {
                 return $var;
@@ -52,14 +52,14 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function tableColor
          *
-         * @author: 713uk13m <dev@nguyenanhung.com>
-         * @time  : 2018-12-19 22:43
-         *
          * @param $current
          * @param $previous
          * @param $id
          *
          * @return string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 2018-12-19 22:43
+         *
          */
         public function tableColor($current, $previous, $id): string
         {
@@ -92,8 +92,13 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * @time  : 9/29/18 11:07
          *
          */
-        public function placeholder(string $size = '300x250', string $bg_color = '', string $text_color = '', string $text = '', string $domain = 'https://placehold.co/'): string
-        {
+        public function placeholder(
+            string $size = '300x250',
+            string $bg_color = '',
+            string $text_color = '',
+            string $text = '',
+            string $domain = 'https://placehold.co/'
+        ): string {
             if (!empty($bg_color)) {
                 $bg_color = '/' . $bg_color;
             }
@@ -111,26 +116,30 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function meta
          *
-         * @param string|array $name
-         * @param string       $content
-         * @param string       $type
-         * @param string       $newline
+         * @param array|string $name
+         * @param string $content
+         * @param string $type
+         * @param string $newline
          *
          * @return string
          * @author: 713uk13m <dev@nguyenanhung.com>
          * @time  : 9/29/18 11:17
          *
          */
-        public function meta($name = '', string $content = '', string $type = 'name', string $newline = "\n"): string
-        {
+        public function meta(
+            array|string $name = '',
+            string $content = '',
+            string $type = 'name',
+            string $newline = "\n"
+        ): string {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
             if (!is_array($name)) {
                 $name = array(
                     array(
-                        'name'    => $name,
+                        'name' => $name,
                         'content' => $content,
-                        'type'    => $type,
+                        'type' => $type,
                         'newline' => $newline
                     )
                 );
@@ -160,27 +169,31 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function metaProperty
          *
-         * @param string|array $property
-         * @param string       $content
-         * @param string       $type
-         * @param string       $newline
+         * @param array|string $property
+         * @param string $content
+         * @param string $type
+         * @param string $newline
          *
          * @return string
          * @author: 713uk13m <dev@nguyenanhung.com>
          * @time  : 9/29/18 11:09
          *
          */
-        public function metaProperty($property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
-        {
+        public function metaProperty(
+            array|string $property = '',
+            string $content = '',
+            string $type = 'property',
+            string $newline = "\n"
+        ): string {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
             if (!is_array($property)) {
                 $property = array(
                     array(
                         'property' => $property,
-                        'content'  => $content,
-                        'type'     => $type,
-                        'newline'  => $newline
+                        'content' => $content,
+                        'type' => $type,
+                        'newline' => $newline
                     )
                 );
             } elseif (isset($property['property'])) {
@@ -221,24 +234,24 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         {
             $content = array(
                 array(
-                    'name'    => 'X-UA-Compatible',
+                    'name' => 'X-UA-Compatible',
                     'content' => 'IE=edge',
-                    'type'    => 'http-equiv'
+                    'type' => 'http-equiv'
                 ),
                 array(
-                    'name'    => 'refresh',
+                    'name' => 'refresh',
                     'content' => $data['refresh']['content'] ?? 1800,
-                    'type'    => 'equiv'
+                    'type' => 'equiv'
                 ),
                 array(
-                    'name'    => 'content-language',
+                    'name' => 'content-language',
                     'content' => 'vi',
-                    'type'    => 'equiv'
+                    'type' => 'equiv'
                 ),
                 array(
-                    'name'    => 'audience',
+                    'name' => 'audience',
                     'content' => $data['audience']['content'] ?? 'general',
-                    'type'    => 'equiv'
+                    'type' => 'equiv'
                 )
             );
             $meta_equiv = $this->meta($content);
@@ -303,7 +316,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * @time  : 10/13/18 09:51
          *
          */
-        public function stripIsTags($str, $tags, bool $stripContent = false)
+        public function stripIsTags($str, $tags, bool $stripContent = false): array|string|null
         {
             $content = '';
             if (!is_array($tags)) {
@@ -334,7 +347,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * @copyright: 713uk13m <dev@nguyenanhung.com>
          * @time     : 08/08/2021 11:13
          */
-        public function stripQuotes(string $str = '')
+        public function stripQuotes(string $str = ''): array|string
         {
             return str_replace(['"', "'"], '', $str);
         }
@@ -393,7 +406,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          *
          * @param string $str
          * @param string $character the character you wish to reduce
-         * @param bool   $trim      TRUE/FALSE - whether to trim the character from the beginning/end
+         * @param bool $trim TRUE/FALSE - whether to trim the character from the beginning/end
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
@@ -410,27 +423,32 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function sitemapParse
          *
-         * @param string       $domain
-         * @param string|array $loc
-         * @param string       $lastmod
-         * @param string       $type
-         * @param string       $newline
+         * @param string $domain
+         * @param array|string $loc
+         * @param string $lastmod
+         * @param string $type
+         * @param string $newline
          *
          * @return string
          * @author: 713uk13m <dev@nguyenanhung.com>
          * @time  : 9/29/18 11:11
          *
          */
-        public function sitemapParse(string $domain = '', $loc = '', string $lastmod = '', string $type = 'property', string $newline = "\n"): string
-        {
+        public function sitemapParse(
+            string $domain = '',
+            array|string $loc = '',
+            string $lastmod = '',
+            string $type = 'property',
+            string $newline = "\n"
+        ): string {
             // Since we allow the data to be passes as a string, a simple array
             // or a multidimensional one, we need to do a little prepping.
             if (!is_array($loc)) {
                 $loc = [
                     [
-                        'loc'     => $loc,
+                        'loc' => $loc,
                         'lastmod' => $lastmod,
-                        'type'    => $type,
+                        'type' => $type,
                         'newline' => $newline
                     ]
                 ];
@@ -460,14 +478,14 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * Convert Reserved XML characters to Entities
          *
          * @param string|mixed $str
-         * @param bool         $protect_all
+         * @param bool $protect_all
          *
          * @return    string
          * @author: 713uk13m <dev@nguyenanhung.com>
          * @time  : 9/29/18 11:11
          *
          */
-        public function xmlConvert($str, bool $protect_all = false): string
+        public function xmlConvert(mixed $str, bool $protect_all = false): string
         {
             $temp = '__TEMP_AMPERSANDS__';
 
@@ -479,7 +497,9 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
                 $str = preg_replace('/&(\w+);/', $temp . '\\1;', $str);
             }
 
-            $str = str_replace(['&', '<', '>', '"', "'", '-'], ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'], $str);
+            $str = str_replace(['&', '<', '>', '"', "'", '-'],
+                ['&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'],
+                $str);
 
             // Decode the temp markers back to entities
             $str = preg_replace('/' . $temp . '(\d+);/', '&#\\1;', $str);
@@ -501,7 +521,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
          * @time  : 9/29/18 11:16
          *
          */
-        public function viewPagination(array $data = array())
+        public function viewPagination(array $data = array()): ?string
         {
             $pagination = new SimplePagination();
             $pagination->setData($data);
@@ -512,14 +532,14 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
         /**
          * Function viewVideoTVPagination
          *
-         * @author: 713uk13m <dev@nguyenanhung.com>
-         * @time  : 2019-02-20 10:09
-         *
          * @param array $data
          *
          * @return string|null
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 2019-02-20 10:09
+         *
          */
-        public function viewVideoTVPagination(array $data = array())
+        public function viewVideoTVPagination(array $data = array()): ?string
         {
             if (isset($data['left_class'])) {
                 unset($data['left_class']);
@@ -531,8 +551,8 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Common::class)) {
                 unset($data['selected_class']);
             }
             $dataClass = array(
-                'left_class'     => 'page-item prev',
-                'right_class'    => 'page-item active',
+                'left_class' => 'page-item prev',
+                'right_class' => 'page-item active',
                 'selected_class' => 'page-item next',
             );
             $paginationData = array_merge($data, $dataClass);

@@ -29,7 +29,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * @static
          *
          * @param string $action
-         * @param array  $attributes HTML attributes
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
@@ -43,7 +43,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
 
             // TODO: CSRF
 
-            return "<form action=\"{$action}\"" . HTML::attributes($attributes) . '>';
+            return "<form action=\"$action\"" . HTML::attributes($attributes) . '>';
         }
 
         /**
@@ -60,9 +60,9 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
         /**
          * Creates a label for an input
          *
-         * @param string      $text       The label text
-         * @param string|null $fieldName  Name of the input element
-         * @param array       $attributes HTML attributes
+         * @param string $text The label text
+         * @param string|null $fieldName Name of the input element
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
@@ -82,19 +82,19 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * Creates a text field
          *
          * @param string $name
-         * @param string $value
-         * @param array  $attributes HTML attributes
+         * @param string|null $value
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
-        public static function text(string $name, string $value = null, array $attributes = array()): string
+        public static function text(string $name, ?string $value = null, array $attributes = array()): string
         {
-            $attributes = array_merge(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               array(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'id'    => static::autoId($name),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'name' => $name,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'type' => 'text',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'value' => $value,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ), $attributes);
+            $attributes = array_merge(array(
+                'id' => static::autoId($name),
+                'name' => $name,
+                'type' => 'text',
+                'value' => $value,
+            ), $attributes);
 
             return HTML::tag('input', $attributes);
         }
@@ -105,19 +105,19 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * @static
          *
          * @param string $name
-         * @param string $value
-         * @param array  $attributes HTML attributes
+         * @param string|null $value
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
-        public static function password(string $name, string $value = null, array $attributes = array()): string
+        public static function password(string $name, ?string $value = null, array $attributes = array()): string
         {
-            $attributes = array_merge(   array(
-                                          'id'    => static::autoId($name),
-                                          'name' => $name,
-                                          'type' => 'password',
-                                          'value' => $value,
-                                      ), $attributes);
+            $attributes = array_merge(array(
+                'id' => static::autoId($name),
+                'name' => $name,
+                'type' => 'password',
+                'value' => $value,
+            ), $attributes);
 
             return HTML::tag('input', $attributes);
         }
@@ -129,18 +129,18 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          *
          * @param string $name
          * @param string $value
-         * @param array  $attributes
+         * @param array $attributes
          *
          * @return string
          */
         public static function hidden(string $name, string $value, array $attributes = array()): string
         {
-            $attributes = array_merge(   array(
-                                          'id'    => static::autoId($name),
-                                          'name' => $name,
-                                          'type' => 'hidden',
-                                          'value' => $value,
-                                      ), $attributes);
+            $attributes = array_merge(array(
+                'id' => static::autoId($name),
+                'name' => $name,
+                'type' => 'hidden',
+                'value' => $value,
+            ), $attributes);
 
             return HTML::tag('input', $attributes);
         }
@@ -149,52 +149,57 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * Creates a textarea
          *
          * @param string $name
-         * @param string $text
-         * @param array  $attributes HTML attributes
+         * @param string|null $text
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
-        public static function textArea(string $name, string $text = null, array $attributes = array()): string
+        public static function textArea(string $name, ?string $text = null, array $attributes = array()): string
         {
-            $attributes = array_merge(   array(
-                                          'id'   => static::autoId($name),
-                                          'name' => $name,
-                                      ), $attributes);
+            $attributes = array_merge(array(
+                'id' => static::autoId($name),
+                'name' => $name,
+            ), $attributes);
 
-            return HTML::tag('textarea', $attributes, (string) $text);
+            return HTML::tag('textarea', $attributes, (string)$text);
         }
 
         /**
          * Creates a check box.
          * By default creates a hidden field with the value of 0, so that the field is present in $_POST even when not checked
          *
-         * @param string      $name
-         * @param bool   $checked
-         * @param mixed  $value                Checked value
-         * @param array  $attributes HTML attributes
+         * @param string $name
+         * @param bool $checked
+         * @param string|null|int $value Checked value
+         * @param array $attributes HTML attributes
          * @param bool|string $withHiddenField Pass false to omit the hidden field or "array" to return both parts as an array
          *
          * @return string|array
          */
-        public static function checkBox(string $name, bool $checked = false, $value = 1, array $attributes = array(), $withHiddenField = true)
-        {
+        public static function checkBox(
+            string $name,
+            bool $checked = false,
+            string|null|int $value = 1,
+            array $attributes = array(),
+            bool|string $withHiddenField = true
+        ): array|string {
             $auto_id = static::autoId($name);
-            $checkboxAttributes = array_merge(   array(
-                                                  'name'    => $name,
-                                                  'type' => 'checkbox',
-                                                  'value' => $value,
-                                                  'id'    => $auto_id,
-                                                  'checked' => $checked,
-                                              ), $attributes);
+            $checkboxAttributes = array_merge(array(
+                'name' => $name,
+                'type' => 'checkbox',
+                'value' => $value,
+                'id' => $auto_id,
+                'checked' => $checked,
+            ), $attributes);
             $checkbox = HTML::tag('input', $checkboxAttributes);
             if ($withHiddenField === false) {
                 return $checkbox;
             }
             $hiddenAttributes = array(
-                'name'  => $name,
+                'name' => $name,
                 'type' => 'hidden',
                 'value' => 0,
-                'id'    => $auto_id . '-hidden',
+                'id' => $auto_id . '-hidden',
             );
             $hidden = HTML::tag('input', $hiddenAttributes);
 
@@ -206,17 +211,22 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
         /**
          * Creates multiple checkboxes for a has-many association.
          *
-         * @param string            $name
-         * @param array  $collection
-         * @param array|Traversable $checked Collection of checked values
-         * @param array             $labelAttributes
-         * @param bool              $returnAsArray
+         * @param string $name
+         * @param array $collection
+         * @param iterable $checked Collection of checked values
+         * @param array $labelAttributes
+         * @param bool $returnAsArray
          *
-         * @throws InvalidArgumentException
          * @return string|array
+         * @throws InvalidArgumentException
          */
-        public static function collectionCheckBoxes(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
-        {
+        public static function collectionCheckBoxes(
+            string $name,
+            array $collection,
+            iterable $checked,
+            array $labelAttributes = array(),
+            bool $returnAsArray = false
+        ): array|string {
             // TODO: Does this check cover all options?
             if (!(is_array($checked) || $checked instanceof Traversable)) {
                 throw new InvalidArgumentException("$name must be an array or Traversable!");
@@ -226,7 +236,13 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
                 $checkBoxes[] = HTML::tag(
                     'label',
                     $labelAttributes,
-                    self::checkBox("{$name}[]", in_array($value, $checked, true), $value, array(), false) . HTML::escape($label),
+                    self::checkBox(
+                        "{$name}[]",
+                        in_array($value, $checked, true),
+                        $value,
+                        array(),
+                        false
+                    ) . HTML::escape($label),
                     false
                 );
             }
@@ -241,19 +257,23 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          *
          * @param string $name
          * @param string $value
-         * @param bool   $checked
-         * @param array  $attributes
+         * @param bool $checked
+         * @param array $attributes
          *
          * @return string
          */
-        public static function radio(string $name, string $value, bool $checked = false, array $attributes = array()): string
-        {
-            $attributes = array_merge(   array(
-                                          'type'    => 'radio',
-                                          'name' => $name,
-                                          'value' => $value,
-                                          'checked' => $checked,
-                                      ), $attributes);
+        public static function radio(
+            string $name,
+            string $value,
+            bool $checked = false,
+            array $attributes = array()
+        ): string {
+            $attributes = array_merge(array(
+                'type' => 'radio',
+                'name' => $name,
+                'value' => $value,
+                'checked' => $checked,
+            ), $attributes);
 
             return HTML::tag('input', $attributes);
         }
@@ -264,15 +284,20 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * @static
          *
          * @param string $name
-         * @param array  $collection
-         * @param mixed  $checked Checked value
-         * @param array  $labelAttributes
-         * @param bool   $returnAsArray
+         * @param array $collection
+         * @param mixed $checked Checked value
+         * @param array $labelAttributes
+         * @param bool $returnAsArray
          *
          * @return array|string
          */
-        public static function collectionRadios(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
-        {
+        public static function collectionRadios(
+            string $name,
+            array $collection,
+            mixed $checked,
+            array $labelAttributes = array(),
+            bool $returnAsArray = false
+        ): array|string {
             $radioButtons = array();
             foreach ($collection as $value => $label) {
                 $radioButtons[] = HTML::tag(
@@ -299,20 +324,24 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * ));
          * </code>
          *
-         * @param string $name       Name of the attribute
-         * @param array  $collection An associative array used for the option values
-         * @param mixed  $selected   Selected option Can be array or scalar
-         * @param array  $attributes HTML attributes
+         * @param string $name Name of the attribute
+         * @param array $collection An associative array used for the option values
+         * @param mixed|null $selected Selected option Can be arrayed or scalar
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
-        public static function select(string $name, array $collection, $selected = null, array $attributes = array()): string
-        {
-            $attributes = array_merge(   array(
-                                          'name'     => $name,
-                                          'id'   => static::autoId($name),
-                                          'multiple' => false,
-                                      ), $attributes);
+        public static function select(
+            string $name,
+            array $collection,
+            mixed $selected = null,
+            array $attributes = array()
+        ): string {
+            $attributes = array_merge(array(
+                'name' => $name,
+                'id' => static::autoId($name),
+                'multiple' => false,
+            ), $attributes);
             if (is_string($selected) || is_numeric($selected)) {
                 $selected = array($selected => 1);
             } elseif (is_array($selected)) {
@@ -342,7 +371,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          *
          * @param string $value
          * @param string $label
-         * @param array  $selected
+         * @param array $selected
          *
          * @return string
          */
@@ -354,7 +383,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
             return HTML::tag(
                 'option',
                 array(
-                    'value'    => $value,
+                    'value' => $value,
                     'selected' => isset($selected[$value]),
                 ),
                 $label,
@@ -368,17 +397,17 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          * @static
          *
          * @param string $name
-         * @param array  $attributes HTML attributes
+         * @param array $attributes HTML attributes
          *
          * @return string
          */
         public static function file(string $name, array $attributes = array()): string
         {
-            $attributes = array_merge(   array(
-                                          'type' => 'file',
-                                          'name' => $name,
-                                          'id'   => static::autoId($name),
-                                      ), $attributes);
+            $attributes = array_merge(array(
+                'type' => 'file',
+                'name' => $name,
+                'id' => static::autoId($name),
+            ), $attributes);
 
             return HTML::tag('input', $attributes);
         }
@@ -386,21 +415,21 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
         /**
          * Function button
          *
-         * @author: 713uk13m <dev@nguyenanhung.com>
-         * @time  : 2018-12-27 23:02
-         *
          * @param       $name
          * @param       $text
          * @param array $attributes
          *
          * @return string
+         * @author: 713uk13m <dev@nguyenanhung.com>
+         * @time  : 2018-12-27 23:02
+         *
          */
         public static function button($name, $text, array $attributes = array()): string
         {
-            $attributes = array_merge(   array(
-                                          'id'   => static::autoId($name),
-                                          'name' => $name,
-                                      ), $attributes);
+            $attributes = array_merge(array(
+                'id' => static::autoId($name),
+                'name' => $name,
+            ), $attributes);
 
             return HTML::tag('button', $attributes, $text);
         }
@@ -414,7 +443,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Form::class)) {
          *
          * @return string|null
          */
-        public static function autoId(string $name)
+        public static function autoId(string $name): ?string
         {
             // Don't set an id on collection inputs
             if (mb_strpos($name, '[]') !== false) {
