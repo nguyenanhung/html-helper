@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Project html-helper
  * Created by PhpStorm
@@ -11,12 +12,12 @@ if (!function_exists('attrs')) {
     /**
      * Function attrs
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:49
-     *
      * @param $attrs
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:49
+     *
      */
     function attrs($attrs): string
     {
@@ -33,13 +34,13 @@ if (!function_exists('css')) {
     /**
      * Function css
      *
+     * @param string $href
+     * @param array $attrs
+     *
+     * @return string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param string $href
-     * @param array  $attrs
-     *
-     * @return string
      */
     function css(string $href = '', array $attrs = []): string
     {
@@ -50,13 +51,13 @@ if (!function_exists('less')) {
     /**
      * Function less
      *
+     * @param string $href
+     * @param array $attrs
+     *
+     * @return string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param string $href
-     * @param array  $attrs
-     *
-     * @return string
      */
     function less(string $href = '', array $attrs = []): string
     {
@@ -67,16 +68,16 @@ if (!function_exists('js')) {
     /**
      * Function js
      *
+     * @param string|null $src
+     * @param string|null $default
+     * @param array $attrs
+     *
+     * @return string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param string|null $src
-     * @param string      $default
-     * @param array       $attrs
-     *
-     * @return string
      */
-    function js(string $src = null, string $default = '', array $attrs = []): string
+    function js(?string $src = '', ?string $default = '', array $attrs = []): string
     {
         return '<script type="text/javascript" src="' . $src . '" ' . attrs($attrs) . '>' . $default . '</script>';
     }
@@ -85,15 +86,15 @@ if (!function_exists('img')) {
     /**
      * Function img
      *
+     * @param string|null $src
+     * @param array $attrs
+     *
+     * @return string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2018-12-27 22:49
      *
-     * @param string|null $src
-     * @param array       $attrs
-     *
-     * @return string
      */
-    function img(string $src = null, array $attrs = []): string
+    function img(?string $src = '', array $attrs = []): string
     {
         return '<img src="' . $src . '" ' . attrs($attrs) . '/>';
     }
@@ -102,20 +103,19 @@ if (!function_exists('fontawesome')) {
     /**
      * Function fontawesome
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:49
-     *
-     * @param string      $version
+     * @param string $version
      * @param string|null $href
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:49
+     *
      */
-    function fontawesome(string $version = '4.7.0', string $href = null): string
+    function fontawesome(string $version = '4.7.0', ?string $href = ''): string
     {
-        if (null === $href) {
+        if (empty($href)) {
             $href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/' . $version . '/css/font-awesome.min.css';
         }
-
         return '<link rel="stylesheet" type="text/css" href="' . $href . '">';
     }
 }
@@ -123,17 +123,17 @@ if (!function_exists('jquery')) {
     /**
      * Function jquery
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:50
-     *
-     * @param string      $version
+     * @param string $version
      * @param string|null $src
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:50
+     *
      */
-    function jquery(string $version = '3.2.1', string $src = null): string
+    function jquery(string $version = '3.2.1', ?string $src = ''): string
     {
-        if (null === $src) {
+        if (empty($src)) {
             $src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/' . $version . '/jquery.min.js';
         }
 
@@ -144,17 +144,17 @@ if (!function_exists('bootstrap_js')) {
     /**
      * Function bootstrap_js
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:50
-     *
-     * @param string      $version
+     * @param string $version
      * @param string|null $src
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:50
+     *
      */
-    function bootstrap_js(string $version = '4.0.0-alpha.6', string $src = null): string
+    function bootstrap_js(string $version = '4.0.0-alpha.6', ?string $src = ''): string
     {
-        if (null === $src) {
+        if (empty($src)) {
             $src = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' . $version . '/js/bootstrap.min.js';
         }
 
@@ -165,20 +165,19 @@ if (!function_exists('bootstrap_css')) {
     /**
      * Function bootstrap_css
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:50
-     *
-     * @param string      $version
+     * @param string $version
      * @param string|null $href
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:50
+     *
      */
-    function bootstrap_css(string $version = '4.0.0-alpha.6', string $href = null): string
+    function bootstrap_css(string $version = '4.0.0-alpha.6', ?string $href = ''): string
     {
-        if (null === $href) {
+        if (empty($href)) {
             $href = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/' . $version . '/css/bootstrap.min.css';
         }
-
         return '<link rel="stylesheet" type="text/css" href="' . $href . '">';
     }
 }
@@ -186,13 +185,13 @@ if (!function_exists('icon')) {
     /**
      * Function icon
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:50
-     *
      * @param string $icon
      * @param string $tag
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:50
+     *
      */
     function icon(string $icon = '', string $tag = 'i'): string
     {
@@ -203,12 +202,12 @@ if (!function_exists('google_analytics')) {
     /**
      * Function google_analytics
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2018-12-27 22:50
-     *
      * @param string $ua
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2018-12-27 22:50
+     *
      */
     function google_analytics(string $ua = ''): string
     {
@@ -229,18 +228,22 @@ if (!function_exists('meta_property')) {
     /**
      * Function meta_property
      *
+     * @param array|string $property
+     * @param string $content
+     * @param string $type
+     * @param string $newline
+     *
+     * @return string
      * @author: 713uk13m <dev@nguyenanhung.com>
      * @time  : 2019-03-25 14:28
      *
-     * @param string|array $property
-     * @param string       $content
-     * @param string       $type
-     * @param string       $newline
-     *
-     * @return string
      */
-    function meta_property($property = '', string $content = '', string $type = 'property', string $newline = "\n"): string
-    {
+    function meta_property(
+        array|string $property = '',
+        string $content = '',
+        string $type = 'property',
+        string $newline = "\n"
+    ): string {
         return (new nguyenanhung\Libraries\HTML\Common())->metaProperty($property, $content, $type, $newline);
     }
 }
@@ -248,19 +251,22 @@ if (!function_exists('placeholder_img')) {
     /**
      * Function placeholder_img
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2019-03-25 14:28
-     *
      * @param string $size
      * @param string $background_color
      * @param string $text_color
      * @param string $text
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2019-03-25 14:28
+     *
      */
-    function placeholder_img(string $size = '300x250', string $background_color = '', string $text_color = '', string $text = ''): string
-    {
-
+    function placeholder_img(
+        string $size = '300x250',
+        string $background_color = '',
+        string $text_color = '',
+        string $text = ''
+    ): string {
         return (new nguyenanhung\Libraries\HTML\Common())->placeholder($size, $background_color, $text_color, $text);
     }
 }
@@ -268,12 +274,12 @@ if (!function_exists('clean_title')) {
     /**
      * Function clean_title
      *
-     * @author: 713uk13m <dev@nguyenanhung.com>
-     * @time  : 2019-03-25 14:28
-     *
      * @param string $str
      *
      * @return string
+     * @author: 713uk13m <dev@nguyenanhung.com>
+     * @time  : 2019-03-25 14:28
+     *
      */
     function clean_title(string $str = ''): string
     {
@@ -316,7 +322,7 @@ if (!function_exists('view_pagination')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 55:48
      */
-    function view_pagination(array $data = array())
+    function view_pagination(array $data = array()): ?string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->viewPagination($data);
     }
@@ -332,7 +338,7 @@ if (!function_exists('view_pagination_for_video_tv')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 14/02/2023 26:17
      */
-    function view_pagination_for_video_tv(array $data = array())
+    function view_pagination_for_video_tv(array $data = array()): ?string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->viewVideoTVPagination($data);
     }
@@ -348,7 +354,7 @@ if (!function_exists('view_more_pagination')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 55:48
      */
-    function view_more_pagination(array $data = array())
+    function view_more_pagination(array $data = array()): ?string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->viewMorePagination($data);
     }
@@ -364,7 +370,7 @@ if (!function_exists('view_select_page_pagination')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 55:48
      */
-    function view_select_page_pagination(array $data = array())
+    function view_select_page_pagination(array $data = array()): ?string
     {
         return (new nguyenanhung\Libraries\HTML\Common())->viewSelectPagination($data);
     }
@@ -389,9 +395,9 @@ if (!function_exists('form_label')) {
     /**
      * Creates a label for an input
      *
-     * @param string      $text       The label text
-     * @param string|null $fieldName  Name of the input element
-     * @param array       $attributes HTML attributes
+     * @param string $text The label text
+     * @param string|null $fieldName Name of the input element
+     * @param array $attributes HTML attributes
      *
      * @return string
      */
@@ -404,13 +410,13 @@ if (!function_exists('form_text')) {
     /**
      * Creates a text field
      *
-     * @param string      $name
+     * @param string $name
      * @param string|null $value
-     * @param array       $attributes HTML attributes
+     * @param array $attributes HTML attributes
      *
      * @return string
      */
-    function form_text(string $name, string $value = null, array $attributes = array()): string
+    function form_text(string $name, ?string $value = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::text($name, $value, $attributes);
     }
@@ -421,13 +427,13 @@ if (!function_exists('form_password')) {
      *
      *
      *
-     * @param string      $name
+     * @param string $name
      * @param string|null $value
-     * @param array       $attributes HTML attributes
+     * @param array $attributes HTML attributes
      *
      * @return string
      */
-    function form_password(string $name, string $value = null, array $attributes = array()): string
+    function form_password(string $name, ?string $value = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::password($name, $value, $attributes);
     }
@@ -440,7 +446,7 @@ if (!function_exists('form_hidden')) {
      *
      * @param string $name
      * @param string $value
-     * @param array  $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -453,32 +459,37 @@ if (!function_exists('form_textArea')) {
     /**
      * Creates a textarea
      *
-     * @param string      $name
+     * @param string $name
      * @param string|null $text
-     * @param array       $attributes HTML attributes
+     * @param array $attributes HTML attributes
      *
      * @return string
      */
-    function form_textArea(string $name, string $text = null, array $attributes = array()): string
+    function form_textArea(string $name, ?string $text = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::textArea($name, $text, $attributes);
     }
 }
 if (!function_exists('form_checkBox')) {
     /**
-     * Creates a check box.
-     * By default creates a hidden field with the value of 0, so that the field is present in $_POST even when not checked
+     * Creates a checkbox.
+     * By default, creates a hidden field with the value of 0, so that the field is present in $_POST even when not checked
      *
-     * @param string      $name
-     * @param bool        $checked
-     * @param mixed       $value           Checked value
-     * @param array       $attributes      HTML attributes
+     * @param string $name
+     * @param bool $checked
+     * @param int|string|null $value Checked value
+     * @param array $attributes HTML attributes
      * @param bool|string $withHiddenField Pass false to omit the hidden field or "array" to return both parts as an array
      *
      * @return string|array
      */
-    function form_checkBox(string $name, bool $checked = false, $value = 1, array $attributes = array(), $withHiddenField = true)
-    {
+    function form_checkBox(
+        string $name,
+        bool $checked = false,
+        int|string|null $value = 1,
+        array $attributes = array(),
+        bool|string $withHiddenField = true
+    ): array|string {
         return nguyenanhung\Libraries\HTML\Form::checkBox($name, $checked, $value, $attributes, $withHiddenField);
     }
 }
@@ -486,18 +497,29 @@ if (!function_exists('form_collectionCheckBoxes')) {
     /**
      * Creates multiple checkboxes for a has-many association.
      *
-     * @param string             $name
-     * @param array              $collection
-     * @param array|\Traversable $checked Collection of checked values
-     * @param array              $labelAttributes
-     * @param bool               $returnAsArray
+     * @param string $name
+     * @param array $collection
+     * @param iterable $checked Collection of checked values
+     * @param array $labelAttributes
+     * @param bool $returnAsArray
      *
-     * @throws \InvalidArgumentException
      * @return string|array
+     * @throws InvalidArgumentException
      */
-    function form_collectionCheckBoxes(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
-    {
-        return nguyenanhung\Libraries\HTML\Form::collectionCheckBoxes($name, $collection, $checked, $labelAttributes, $returnAsArray);
+    function form_collectionCheckBoxes(
+        string $name,
+        array $collection,
+        iterable $checked,
+        array $labelAttributes = array(),
+        bool $returnAsArray = false
+    ): array|string {
+        return nguyenanhung\Libraries\HTML\Form::collectionCheckBoxes(
+            $name,
+            $collection,
+            $checked,
+            $labelAttributes,
+            $returnAsArray
+        );
     }
 }
 if (!function_exists('form_radio')) {
@@ -508,8 +530,8 @@ if (!function_exists('form_radio')) {
      *
      * @param string $name
      * @param string $value
-     * @param bool   $checked
-     * @param array  $attributes
+     * @param bool $checked
+     * @param array $attributes
      *
      * @return string
      */
@@ -525,16 +547,27 @@ if (!function_exists('form_collectionRadios')) {
      *
      *
      * @param string $name
-     * @param array  $collection
-     * @param mixed  $checked Checked value
-     * @param array  $labelAttributes
-     * @param bool   $returnAsArray
+     * @param array $collection
+     * @param mixed $checked Checked value
+     * @param array $labelAttributes
+     * @param bool $returnAsArray
      *
      * @return array|string
      */
-    function form_collectionRadios(string $name, array $collection, $checked, array $labelAttributes = array(), bool $returnAsArray = false)
-    {
-        return nguyenanhung\Libraries\HTML\Form::collectionRadios($name, $collection, $checked, $labelAttributes, $returnAsArray);
+    function form_collectionRadios(
+        string $name,
+        array $collection,
+        mixed $checked,
+        array $labelAttributes = array(),
+        bool $returnAsArray = false
+    ): array|string {
+        return nguyenanhung\Libraries\HTML\Form::collectionRadios(
+            $name,
+            $collection,
+            $checked,
+            $labelAttributes,
+            $returnAsArray
+        );
     }
 }
 if (!function_exists('form_select')) {
@@ -551,14 +584,14 @@ if (!function_exists('form_select')) {
      * ));
      * </code>
      *
-     * @param string $name       Name of the attribute
-     * @param array  $collection An associative array used for the option values
-     * @param mixed  $selected   Selected option Can be array or scalar
-     * @param array  $attributes HTML attributes
+     * @param string $name Name of the attribute
+     * @param array $collection An associative array used for the option values
+     * @param mixed|null $selected Selected option Can be array or scalar
+     * @param array $attributes HTML attributes
      *
      * @return string
      */
-    function form_select(string $name, array $collection, $selected = null, array $attributes = array()): string
+    function form_select(string $name, array $collection, mixed $selected = null, array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::select($name, $collection, $selected, $attributes);
     }
@@ -569,7 +602,7 @@ if (!function_exists('form_option')) {
      *
      * @param string $value
      * @param string $label
-     * @param array  $selected
+     * @param array $selected
      *
      * @return string
      */
@@ -624,7 +657,7 @@ if (!function_exists('form_autoId')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 08/18/2021 15:13
      */
-    function form_autoId($name)
+    function form_autoId($name): ?string
     {
         return nguyenanhung\Libraries\HTML\Form::autoId($name);
     }
@@ -635,14 +668,14 @@ if (!function_exists('highlight_search_keyword')) {
      *
      * @param $keyword
      * @param $string
-     * @param $font_color
+     * @param string $font_color
      *
      * @return string
      * @author   : 713uk13m <dev@nguyenanhung.com>
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 11/08/2023 18:09
      */
-    function highlight_search_keyword($keyword, $string, $font_color = 'background:#d46220')
+    function highlight_search_keyword($keyword, $string, string $font_color = 'background:#d46220'): string
     {
         return nguyenanhung\Libraries\HTML\Highlight::highlightSearchKeyword($keyword, $string, $font_color);
     }
@@ -659,7 +692,7 @@ if (!function_exists('format_keyword_for_highlight_search_keyword')) {
      * @copyright: 713uk13m <dev@nguyenanhung.com>
      * @time     : 16/02/2023 47:15
      */
-    function format_keyword_for_highlight_search_keyword($keyword, $page)
+    function format_keyword_for_highlight_search_keyword($keyword, $page): mixed
     {
         return nguyenanhung\Libraries\HTML\Highlight::formatForHighlightSearchKeyword($keyword, $page);
     }
@@ -668,13 +701,13 @@ if (!function_exists('html_tag')) {
     /**
      * Create a XHTML tag
      *
-     * @param string       $tag     The tag name
-     * @param array|string $attr    The tag attributes
-     * @param string|bool  $content The content to place in the tag, or false for no closing tag
+     * @param string $tag The tag name
+     * @param array|string $attr The tag attributes
+     * @param bool|string $content The content to place in the tag, or false for no closing tag
      *
      * @return    string
      */
-    function html_tag($tag, $attr = array(), $content = false)
+    function html_tag(string $tag, array|string $attr = array(), bool|string $content = false): string
     {
         // list of void elements (tags that can not have content)
         static $void_elements = array(
@@ -724,11 +757,10 @@ if (!function_exists('array_to_attr')) {
      *
      * @return    string
      */
-    function array_to_attr($attr)
+    function array_to_attr(array $attr): string
     {
         $attr_str = '';
-
-        foreach ((array) $attr as $property => $value) {
+        foreach ($attr as $property => $value) {
             // Ignore null/false
             if ($value === null || $value === false) {
                 continue;

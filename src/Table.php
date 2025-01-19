@@ -58,51 +58,51 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * @var array
          */
-        public $rows = array();
+        public array $rows = array();
 
         /**
          * Data for table heading
          *
          * @var array
          */
-        public $heading = array();
+        public array $heading = array();
 
         /**
-         * Whether or not to automatically create the table header
+         * Whether to automatically create the table header
          *
          * @var bool
          */
-        public $auto_heading = true;
+        public bool $auto_heading = true;
 
         /**
          * Table caption
          *
          * @var string
          */
-        public $caption;
+        public string $caption;
 
         /**
          * Table layout template
          *
-         * @var array
+         * @var array|null
          */
-        public $template;
+        public array|null $template;
 
         /**
          * Newline setting
          *
          * @var string
          */
-        public $newline = "\n";
+        public string $newline = "\n";
 
         /**
          * Contents of empty cells
          *
          * @var string
          */
-        public $empty_cells = '';
+        public string $empty_cells = '';
 
-        /** @var null Callback for custom table layout */
+        /** @var null|callable Callback for custom table layout */
         public $function;
 
         /**
@@ -131,12 +131,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          */
         public function set_template(array $template): bool
         {
-            if (!is_array($template)) {
-                return false;
-            }
-
             $this->template = $template;
-
             return true;
         }
 
@@ -147,11 +142,11 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * Can be passed as an array or discreet params
          *
-         * @param mixed
+         * @param null|array $args
          *
          * @return    Table
          */
-        public function set_heading($args = array()): Table
+        public function set_heading(null|array $args = array()): Table
         {
             $this->heading = $this->_prep_args(func_get_args());
 
@@ -162,16 +157,16 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
 
         /**
          * Set columns. Takes a one-dimensional array as input and creates
-         * a multi-dimensional array with a depth equal to the number of
+         * a multidimensional array with a depth equal to the number of
          * columns. This allows a single array with many elements to be
          * displayed in a table that has a fixed column count.
          *
          * @param array $array
-         * @param int   $col_limit
+         * @param int $col_limit
          *
          * @return    array|bool
          */
-        public function make_columns(array $array = array(), int $col_limit = 0)
+        public function make_columns(array $array = array(), int $col_limit = 0): bool|array
         {
             if (!is_int($col_limit)) {
                 return false;
@@ -200,8 +195,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
                 }
 
                 $new[] = $temp;
-            }
-            while (count($array) > 0);
+            } while (count($array) > 0);
 
             return $new;
         }
@@ -217,7 +211,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * @return    Table
          */
-        public function set_empty($value): Table
+        public function set_empty(mixed $value): Table
         {
             $this->empty_cells = $value;
 
@@ -231,11 +225,11 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * Can be passed as an array or discreet params
          *
-         * @param mixed
+         * @param null|array $args
          *
          * @return    Table
          */
-        public function add_row($args = array()): Table
+        public function add_row(null|array $args = array()): Table
         {
             $this->rows[] = $this->_prep_args(func_get_args());
 
@@ -249,11 +243,11 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * Ensures a standard associative array format for all cell data
          *
-         * @param array
+         * @param array $args
          *
          * @return    array
          */
-        protected function _prep_args($args): array
+        protected function _prep_args(array $args): array
         {
             // If there is no $args[0], skip this and treat as an associative array
             // This can happen if there is only a single key, for example this is passed to table->generate
@@ -290,11 +284,11 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
         /**
          * Generate the table
          *
-         * @param mixed $table_data
+         * @param mixed|null $table_data
          *
          * @return    string
          */
-        public function generate($table_data = null): string
+        public function generate(mixed $table_data = null): string
         {
             // The table data can optionally be passed to this function
             // either as a database result object or an array
@@ -424,7 +418,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * @return    void
          */
-        protected function _set_from_db_result($object)
+        protected function _set_from_db_result(object $object): void
         {
             // First generate the headings from the table column names
             if ($this->auto_heading === true && empty($this->heading)) {
@@ -445,7 +439,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * @return    void
          */
-        protected function _set_from_array(array $data)
+        protected function _set_from_array(array $data): void
         {
             if ($this->auto_heading === true && empty($this->heading)) {
                 $this->heading = $this->_prep_args(array_shift($data));
@@ -463,7 +457,7 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
          *
          * @return    void
          */
-        protected function _compile_template()
+        protected function _compile_template(): void
         {
             if ($this->template === null) {
                 $this->template = $this->_default_template();
@@ -472,9 +466,28 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
             }
 
             $temp = $this->_default_template();
-            foreach (array('table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start',
-                           'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end',
-                           'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val) {
+            foreach (
+                array(
+                    'table_open',
+                    'thead_open',
+                    'thead_close',
+                    'heading_row_start',
+                    'heading_row_end',
+                    'heading_cell_start',
+                    'heading_cell_end',
+                    'tbody_open',
+                    'tbody_close',
+                    'row_start',
+                    'row_end',
+                    'cell_start',
+                    'cell_end',
+                    'row_alt_start',
+                    'row_alt_end',
+                    'cell_alt_start',
+                    'cell_alt_end',
+                    'table_close'
+                ) as $val
+            ) {
                 if (!isset($this->template[$val])) {
                     $this->template[$val] = $temp[$val];
                 }
@@ -491,24 +504,24 @@ if (!class_exists(\nguyenanhung\Libraries\HTML\Table::class)) {
         protected function _default_template(): array
         {
             return array(
-                'table_open'         => '<table border="0" cellpadding="4" cellspacing="0">',
-                'thead_open'         => '<thead>',
-                'thead_close'        => '</thead>',
-                'heading_row_start'  => '<tr>',
-                'heading_row_end'    => '</tr>',
+                'table_open' => '<table border="0" cellpadding="4" cellspacing="0">',
+                'thead_open' => '<thead>',
+                'thead_close' => '</thead>',
+                'heading_row_start' => '<tr>',
+                'heading_row_end' => '</tr>',
                 'heading_cell_start' => '<th>',
-                'heading_cell_end'   => '</th>',
-                'tbody_open'         => '<tbody>',
-                'tbody_close'        => '</tbody>',
-                'row_start'          => '<tr>',
-                'row_end'            => '</tr>',
-                'cell_start'         => '<td>',
-                'cell_end'           => '</td>',
-                'row_alt_start'      => '<tr>',
-                'row_alt_end'        => '</tr>',
-                'cell_alt_start'     => '<td>',
-                'cell_alt_end'       => '</td>',
-                'table_close'        => '</table>'
+                'heading_cell_end' => '</th>',
+                'tbody_open' => '<tbody>',
+                'tbody_close' => '</tbody>',
+                'row_start' => '<tr>',
+                'row_end' => '</tr>',
+                'cell_start' => '<td>',
+                'cell_end' => '</td>',
+                'row_alt_start' => '<tr>',
+                'row_alt_end' => '</tr>',
+                'cell_alt_start' => '<td>',
+                'cell_alt_end' => '</td>',
+                'table_close' => '</table>'
             );
         }
     }
