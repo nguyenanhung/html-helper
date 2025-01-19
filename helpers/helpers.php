@@ -401,7 +401,7 @@ if (!function_exists('form_label')) {
      *
      * @return string
      */
-    function form_label(string $text, string $fieldName = null, array $attributes = array()): string
+    function form_label(string $text, ?string $fieldName = '', array $attributes = array()): string
     {
         return nguyenanhung\Libraries\HTML\Form::label($text, $fieldName, $attributes);
     }
